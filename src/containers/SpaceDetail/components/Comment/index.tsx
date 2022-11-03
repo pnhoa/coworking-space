@@ -1,6 +1,6 @@
 import { Col, Row } from 'antd';
 import { commentApi } from 'api/commentApi';
-import { Comment, ListParams } from 'interfaces';
+import { Comment } from 'interfaces';
 import React, { useEffect, useState } from 'react';
 import { AddComment } from './components/AddComment';
 import { CommentList } from './components/CommentList';

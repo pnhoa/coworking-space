@@ -187,7 +187,7 @@ const RegisterPage: FC = () => {
                 <Button
                   type='primary'
                   htmlType='submit'
-                  style={{ width: '100%' }}
+                  style={{ width: '100%',background: '#019164' }}
                   loading={loading}
                 >
                   Register
@@ -195,7 +195,7 @@ const RegisterPage: FC = () => {
               </Form.Item>
               <Form.Item style={{ textAlign: 'center' }}>
                 If you have an account,
-                <Link to='/login'> Login here</Link>
+                <Link to='/login' style={{color: '#019164'}}> Login here</Link>
               </Form.Item>
             </FormContextCustom.Provider>
           </Form>

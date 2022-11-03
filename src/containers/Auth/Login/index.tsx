@@ -78,17 +78,17 @@ const LoginPage: FC = () => {
             <Form.Item>
               <Button
                 type='primary'
-                style={{ width: 360 }}
+                style={{ width: 360,background: '#019164' }}
                 htmlType='submit'
                 className='login-form-button'
                 loading={loading}
               >
-                Log in
+                Login
               </Button>
             </Form.Item>
             <Form.Item style={{ textAlign: 'center' }}>
               If you don't have an account,
-              <Link to='/register'> Register here</Link>
+              <Link to='/register' style={{color: '#019164'}}> Register here</Link>
             </Form.Item>
           </Form>
         </div>

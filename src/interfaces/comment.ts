@@ -7,18 +7,20 @@ export interface Comment {
   modifiedDate?: string;
   createdBy?: string;
   modifiedBy?: string;
-  comment: string;
-  productId: number;
-  customer: User;
-  customerId: number;
+  content: string;
+  rate: number;
+  spaceId: number;
+  user: User;
+  userId: number;
 }
 
 export interface CommentPayload extends ListParams {
-  productId: number;
+  spaceId: number;
+  rate: number;
 }
 
 export interface FeedBackPayload {
-  rating: number;
-  productId: number;
+  rate: number;
+  spaceId: number;
   customerId: number;
 }

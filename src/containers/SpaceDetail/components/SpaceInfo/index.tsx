@@ -37,7 +37,7 @@ export const SpaceInfor: React.FC<Props> = ({ data }) => {
             <span className='ProductItem'>Rating</span>
             <span className='ProductItem'>
               {space.ratingAverage ? (
-                <Rate allowHalf value={space.ratingAverage} />
+                <Rate allowHalf value={space.ratingAverage} disabled />
               ) : (
                 'Not Rating'
               )}

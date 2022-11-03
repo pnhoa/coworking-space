@@ -93,7 +93,7 @@ export const SpaceDetail = () => {
               </div>
               <div className='product-comments'>
                 <div className='title'>Comment and feedback </div>
-                <CommentComponent productId={Number(id)} />
+                <CommentComponent spaceId={Number(id)} />
               </div>
               <div className='RelatedWapper'>
                 <SpaceRelated data={spaceRelatedList} />

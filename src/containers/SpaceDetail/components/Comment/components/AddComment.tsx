@@ -1,28 +1,28 @@
-import { Button, Form, notification } from 'antd';
+import { Button, Form, notification, Rate } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { commentApi } from 'api/commentApi';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
-  productId: number;
+  spaceId: number;
   onSubmit: () => void;
 }
 
-export const AddComment: React.FC<Props> = ({ productId, onSubmit }) => {
+export const AddComment: React.FC<Props> = ({ spaceId, onSubmit }) => {
   const navigate = useNavigate();
-  const customerId = Number(localStorage.getItem('id'));
+  const userId = Number(localStorage.getItem('id'));
 
   const handleOnFinish = async (values: any) => {
     try {
-      if (!customerId) {
+      if (!userId) {
         notification.info({
           message: 'Please login to comment!',
           placement: 'top',
         });
         return navigate('/login');
       }
-      await commentApi.create({ ...values, productId, customerId });
+      await commentApi.create({ ...values, spaceId, userId });
       notification.success({
         message: `Add comment successfully!`,
         placement: 'bottomRight',
@@ -30,7 +30,7 @@ export const AddComment: React.FC<Props> = ({ productId, onSubmit }) => {
       onSubmit();
     } catch (error) {
       notification.error({
-        message: `Thất bại !!!!`,
+        message: `Failed !!!!`,
         placement: 'bottomRight',
       });
     }
@@ -38,9 +38,16 @@ export const AddComment: React.FC<Props> = ({ productId, onSubmit }) => {
 
   return (
     <div>
-      <Form onFinish={handleOnFinish}>
+      <Form onFinish={handleOnFinish} initialValues={{
+                rate: 5,
+                spaceId: spaceId
+      }} >
+        <Form.Item name='rate' >
+            <Rate />
+        </Form.Item>
+        <Form.Item name='spaceId' hidden></Form.Item>
         <Form.Item
-          name='comment'
+          name='content'
           rules={[
             {
               required: true,

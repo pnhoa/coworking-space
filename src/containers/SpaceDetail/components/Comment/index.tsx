@@ -7,25 +7,28 @@ import { CommentList } from './components/CommentList';
 import { CommentStyles } from './styles';
 
 interface Prop {
-  productId: number;
+  spaceId: number;
 }
-export const CommentComponent: React.FC<Prop> = ({ productId }) => {
+export const CommentComponent: React.FC<Prop> = ({ spaceId }) => {
   const [comments, setComments] = useState<Comment[]>();
   const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({
     page: 0,
-    limit: 5,
+    limit: 3,
     total: 20,
   });
   useEffect(() => {
     (async () => {
-      const data = await commentApi.getApi({ productId, ...pagination });
+      const data = await commentApi.getApi({
+        spaceId, ...pagination,
+        rate: 0
+      });
       setComments(data.data as any);
       setPagination(data.pagination);
       setLoading(false);
     })();
-  }, [pagination.page, refresh]);
+  }, [pagination, pagination.page, refresh, spaceId]);
 
   const handlePageChange = (page: number) => {
     setPagination({ ...pagination, page: page - 1 });
@@ -49,7 +52,7 @@ export const CommentComponent: React.FC<Prop> = ({ productId }) => {
                 />
               </Col>
               <Col span={8} style={{ marginTop: '10px' }}>
-                <AddComment productId={productId} onSubmit={handleOnSubmit} />
+                <AddComment spaceId={spaceId} onSubmit={handleOnSubmit} />
               </Col>
             </Row>
           </div>

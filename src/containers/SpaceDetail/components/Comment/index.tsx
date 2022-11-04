@@ -28,7 +28,7 @@ export const CommentComponent: React.FC<Prop> = ({ spaceId }) => {
       setPagination(data.pagination);
       setLoading(false);
     })();
-  }, [pagination, pagination.page, refresh, spaceId]);
+  }, [pagination.page, refresh, spaceId]);
 
   const handlePageChange = (page: number) => {
     setPagination({ ...pagination, page: page - 1 });

@@ -17,7 +17,7 @@ export const CommentList: React.FC<Props> = ({ comments, pagination, paginChange
   };
   return (
     <CommentStyles>
-      {!comments.length ? (
+      {(comments.length=== 0 && pagination.page === 0) ? (
         <div id='comment-empty'>
           <Empty />
           <p>Space don't have comment and rating</p>
@@ -26,7 +26,7 @@ export const CommentList: React.FC<Props> = ({ comments, pagination, paginChange
         <>
           <div className='comment-content'>
             {comments.map((comment) => (
-              <div className='comment-item'>
+              <div className='comment-item' key={comment.id}>
                 <Rate allowHalf value={comment.rate} disabled />
                 <CommentAntD
                   content={comment.content}

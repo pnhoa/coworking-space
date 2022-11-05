@@ -1,4 +1,4 @@
-import { Pagination } from 'antd';
+import { notification, Pagination } from 'antd';
 import spaceApi from 'api/spaceApi';
 import { Footer } from 'components/Footer';
 import NavBar from 'components/Header';
@@ -42,7 +42,7 @@ export const Space = () => {
         setPagination(data.pagination);
         setFilterLoading(false);
       } catch (error) {
-        console.log('Failed to fetch space list: ', error);
+        notification.error({message: "Failed to fetch space list"})
       }
     })();
   }, [queryParams]);

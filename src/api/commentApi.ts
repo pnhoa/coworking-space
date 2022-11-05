@@ -11,7 +11,6 @@ export const commentApi = {
     };
   },
   async create(payload: Comment) {
-    console.log(payload)
     await axiosClient.post('/comments', { ...payload });
   },
 };

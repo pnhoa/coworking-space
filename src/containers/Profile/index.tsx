@@ -19,7 +19,6 @@ export const ProfilePage = () => {
   const customerId = Number(localStorage.getItem('id'));
   useEffect(() => {
     (async () => {
-      console.log(customerId)
       if(customerId === 0){
         setTimeout(() => {
           notification.error({ message:"Please login!!"})

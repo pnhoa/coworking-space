@@ -20,10 +20,17 @@ export const CommentComponent: React.FC<Prop> = ({ spaceId }) => {
   });
   useEffect(() => {
     (async () => {
-      const data = await commentApi.getApi({
+      let data = await commentApi.getApi({
         spaceId, ...pagination,
         rate: 0
       });
+      if(pagination.page !== 0 && data.data.length === 0) {
+        pagination.page = 0
+        data = await commentApi.getApi({
+          spaceId, ...pagination,
+          rate: 0
+        });
+      }
       setComments(data.data as any);
       setPagination(data.pagination);
       setLoading(false);

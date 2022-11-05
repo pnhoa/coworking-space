@@ -22,7 +22,6 @@ export const ProfileUpdate: React.FC<Prop> = ({ customer, onRefresh }) => {
       if (!gender) gender = customer.gender;
       const updateValues = { ...values, profilePicture, gender };
       setLoading(true);
-      console.log(updateValues)
       await userApi.update(customer.id, updateValues);
       onRefresh();
       setLoading(false);

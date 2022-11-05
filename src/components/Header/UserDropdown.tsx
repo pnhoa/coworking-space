@@ -7,7 +7,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { Avatar, Dropdown, Menu } from 'antd';
+import { Avatar, Dropdown, Menu, notification } from 'antd';
 import { userApi } from 'api/userApi';
 import { useAppDispatch } from 'app/hook';
 import { User } from 'interfaces';
@@ -27,7 +27,7 @@ export const UserDropdown = () => {
         const data: User = await userApi.getById(id);
         setProfile(data);
       } catch (error) {
-        console.log('Failed to fetch profile: ', error);
+        notification.error({message: "Failed to fetch profile"})
       }
     })();
   }, []);

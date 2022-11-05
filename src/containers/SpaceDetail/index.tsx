@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { Col } from 'antd';
+import { Col, Image } from 'antd';
 import spaceApi from 'api/spaceApi';
 import { Footer } from 'components/Footer';
 import NavBar from 'components/Header';
@@ -69,15 +69,15 @@ export const SpaceDetail = () => {
           <NavBar />
           <div className='container_productDetails'>
             <div className='grid__row'>
-              <div className='grid__column5'>
-                <div className='back_btn'>
+              <div className='back_btn '>
                   <Link to={'/'} className='btn_back'>
                     <i>
                       <ArrowLeftOutlined />
                     </i>
                     Back
                   </Link>
-                </div>
+              </div>
+              <div className='grid__column5'>
                 {images.length !== 0 ? (
                   <div className='product_img'>
                   <Col span={36} >
@@ -88,7 +88,63 @@ export const SpaceDetail = () => {
                   <img src='../default.png'></img>
                 )}
               </div>
-              <div className='grid__column5'>
+              <div className='grid__column5_picture'>
+                <div className='spaceTableImage'>
+                  <div className='ProductTableRow'>
+                    <Image
+                      src={ space.largeImage ? space.largeImage : `no-data.jpeg`}
+                      alt='image'
+                      style={{
+                        width: '360px',
+                        height: '170px',
+                        borderRadius: '6px',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        marginRight: '15px'
+                      }}
+                    />
+                    <Image
+                      src={ space.largeImage ? space.largeImage : `no-data.jpeg`}
+                      alt='image'
+                      style={{
+                        width: '360px',
+                        height: '170px',
+                        borderRadius: '6px',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        marginRight: '15px'
+                      }}
+                    />
+                  </div>
+                  <div className='ProductTableRow'>
+                    <Image
+                      src={ space.largeImage ? space.largeImage : `no-data.jpeg`}
+                      alt='image'
+                      style={{
+                        width: '360px',
+                        height: '170px',
+                        borderRadius: '6px',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        marginRight: '15px'
+                      }}
+                    />
+                    <Image
+                      src={ space.largeImage ? space.largeImage : `no-data.jpeg`}
+                      alt='image'
+                      style={{
+                        width: '360px',
+                        height: '173px',
+                        borderRadius: '6px',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        marginRight: '15px'
+                      }}
+                    />
+                  </div>
+                </div>  
+              </div>
+              <div className='space-overview'>
                 <SpaceInfor data={space} />
               </div>
               <div className='product-comments'>

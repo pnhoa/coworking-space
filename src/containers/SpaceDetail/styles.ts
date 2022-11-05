@@ -15,7 +15,17 @@ export const SpaceDetailWrapper = styled.div`
   }
   .grid__column5 {
     width: 50%;
-    padding: 60px;
+    padding: 60px 0px 30px 80px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+  }
+  .grid__column5_picture {
+    width: 50%;
+    padding: 30px 10px 10px 10px;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -28,8 +38,8 @@ export const SpaceDetailWrapper = styled.div`
   }
   .back_btn {
     position: absolute;
-    top: 60px;
-    left: 60px;
+    top: 130px;
+    left: 80px;
     z-index: 999;
   }
   .btn_back {
@@ -60,7 +70,7 @@ export const SpaceDetailWrapper = styled.div`
     display: block;
     max-width: 100%;
     height: auto;
-    margin-top: 50px;
+    margin-top: 40px;
   }
   .grid_infor {
     align-items: start;
@@ -72,6 +82,16 @@ export const SpaceDetailWrapper = styled.div`
     line-height: 1.2;
     margin-bottom: 15px;
   }
+  .spaceAddress {
+    display: flex;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.0;
+    margin-bottom: 10px;
+  }
+  .spaceAddressDetail {
+    margin-left: 10px
+  }
   .ProductBand {
     font-family: Lato, sans-serif;
     font-size: 15px;
@@ -82,14 +102,14 @@ export const SpaceDetailWrapper = styled.div`
     align-items: center;
     line-height: 22px;
   }
-  .ProductDescription {
+  .spaceDescription {
     font-family: Lato, sans-serif;
     font-size: 15px;
     font-weight: 400;
     color: rgb(66, 69, 97);
     line-height: 2;
-    margin-top: 30px;
-    margin-bottom: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
   }
@@ -101,6 +121,11 @@ export const SpaceDetailWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
+  }
+  .spaceTableImage {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
   }
   .ProductTableRow {
     display: flex;
@@ -206,10 +231,17 @@ export const SpaceDetailWrapper = styled.div`
       width: 49%;
       margin-right: -5px;
     }
+    .grid__column5_picture {
+      width: 49%;
+      margin-right: -5px;
+    }
   }
 
   @media (max-width: 764px) {
     .grid__column5 {
+      width: 100%;
+    }
+    .grid__column5_picture {
       width: 100%;
     }
     .ProductTable {
@@ -407,5 +439,12 @@ export const SpaceDetailWrapper = styled.div`
     & > .comment {
       padding: 0 70px;
     }
+  }
+
+  .space-overview {
+    width: 100%;
+    margin: 10px 0 !important;
+    padding: 10px 80px 10px 80px !important;
+    background-color: #f7f7f7;
   }
 `;

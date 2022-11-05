@@ -18,7 +18,7 @@ const ImageSlider: FC<Props> = ({ images, className, extraAction }) => {
               alt='image'
               style={{
                 width: '1080px',
-                height: '480px',
+                height: '360px',
                 borderRadius: '6px',
                 objectFit: 'cover',
                 objectPosition: 'center',

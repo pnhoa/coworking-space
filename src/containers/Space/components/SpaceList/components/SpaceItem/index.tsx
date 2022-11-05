@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import SpaceItemWrapper from 'containers/Space/style';
 import { SearchOutlined } from '@ant-design/icons';
 import { formatPrice } from 'utils/common';
+import { Rate } from 'antd';
 
 interface Props {
   item: Space;
@@ -20,6 +21,7 @@ export const SpaceItem: React.FC<Props> = (props) => {
         ></div>
         <h3 className='home__productitemsname'>{item.name}</h3>
         <h4 className='home__productitemsaddress'>{item.district}, {item.province}, {item.country}</h4>
+        {item.ratingAverage === 0 ? <></> : <Rate style={{marginLeft:'15px', fontSize:'15px'}} allowHalf value={item.ratingAverage} disabled />}
         <div className='home__productprice'>
           <span className='home__productitemsprice'>{formatPrice(Number(item.price))}/{item.unit}</span>
           

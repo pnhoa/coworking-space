@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { Col } from 'antd';
+import { Button, Col, Image } from 'antd';
 import spaceApi from 'api/spaceApi';
 import { Footer } from 'components/Footer';
 import NavBar from 'components/Header';
@@ -8,6 +8,7 @@ import { Loading } from 'components/Loading';
 import { SpaceDetail as Space, Space as SpaceOverview } from 'interfaces';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
+import { formatPrice } from 'utils/common';
 import { CommentComponent } from './components/Comment';
 import ImageSlider from './components/ImageSlider';
 import { SpaceInfor } from './components/SpaceInfo';
@@ -69,29 +70,80 @@ export const SpaceDetail = () => {
           <NavBar />
           <div className='container_productDetails'>
             <div className='grid__row'>
-              <div className='grid__column5'>
-                <div className='back_btn'>
+              <div className='back_btn '>
                   <Link to={'/'} className='btn_back'>
                     <i>
                       <ArrowLeftOutlined />
                     </i>
                     Back
                   </Link>
-                </div>
+              </div>
+              <div className='grid__column5'>
                 {images.length !== 0 ? (
                   <div className='product_img'>
                   <Col span={36} >
-                    <ImageSlider   images={images}  />
+                    <Image
+                      src={ images[0] ? images[0] : `no-data.jpeg`}
+                      alt='image'
+                      style={{
+                        width: '720px',
+                        height: '360px',
+                        borderRadius: '6px',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                      }}
+                    />
                   </Col></div>
                 ) : (
                   // eslint-disable-next-line jsx-a11y/alt-text
                   <img src='../default.png'></img>
                 )}
               </div>
-              <div className='grid__column5'>
-                <SpaceInfor data={space} />
+              <div className='grid__column5_picture'>
+                <div className='spaceTableImage'>           
+                  <div className='ProductTableRow'>
+                    <Image className='image-detail'
+                      src={ images[1] ? images[1] : `no-data.jpeg`}
+                      alt='image'
+                    />
+                    <Image className='image-detail'
+                      src={ images[2] ? images[2] : `no-data.jpeg`}
+                      alt='image'
+                    />
+                  </div>
+                  <div className='ProductTableRow'>
+                    <Image className='image-detail'
+                      src={ images[3] ? images[3] : `no-data.jpeg`}
+                      alt='image'
+                      
+                    />
+                    {images[4] ?
+                      <Image className='image-detail'
+                        src={ images[4] ? images[4] : `./default.png`}
+                        alt='image'
+                      />
+                      : <></>}
+                  </div>
+                </div> 
               </div>
-              <div className='product-comments'>
+
+              <div className='space-detail'>
+                <div className='space-detail-com1'>
+                  <div className='space-overview'>
+                    <SpaceInfor data={space} />
+                  </div>
+                </div>
+
+                <div  className='space-detail-com2'>
+                  <div className="space-starting-con">Starting at</div>
+                  <h5>{formatPrice(space?.price)}/{space.unit}</h5>
+                  <Button type='primary' ghost size='large' className='booking-space'>
+                  {' '}
+                    BOOKING NOW{' '}
+                  </Button>
+                </div>
+              </div>
+              <div className='space-comments'>
                 <div className='title'>Comment and feedback </div>
                 <CommentComponent spaceId={Number(id)} />
               </div>

@@ -28,7 +28,7 @@ export const SpaceInfor: React.FC<Props> = ({ data }) => {
   return (
     <SpaceDetailWrapper>
       <div>
-        <h4 className='ProductName'>{space?.name}</h4>
+        <h1 className='ProductName'>{space?.name}</h1>
         <div className='spaceAddress'>
           <CompassOutlined />
           <p  className='spaceAddressDetail'> {space.spaceAddress.addressLine1}, {space.spaceAddress.district}, {space.spaceAddress.province}, {space.spaceAddress.country}</p>
@@ -51,13 +51,6 @@ export const SpaceInfor: React.FC<Props> = ({ data }) => {
             </span>
           </div>
         </div>
-        {space.numberOfRoom ? (
-          <div className='ProductCartWapper'>
-            <div className='ProductPriceWapper'>{formatPrice(space?.price)}</div>
-          </div>
-        ) : (
-          ''
-        )}
       </div>
     </SpaceDetailWrapper>
   );

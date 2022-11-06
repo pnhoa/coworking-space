@@ -115,13 +115,12 @@ export default styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     margin: 6px 0px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   .home__productitemsaddress {
     padding: 0px 10px;
     line-height: 1.8rem;
-    height: 3.6rem;
     overflow: hidden;
     font-size: 14px;
     font-weight: 600;
@@ -131,7 +130,7 @@ export default styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     margin: 12px 0px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   .home__productitemsprice {

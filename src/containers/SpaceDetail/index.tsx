@@ -10,9 +10,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { formatPrice } from 'utils/common';
 import { CommentComponent } from './components/Comment';
-import ImageSlider from './components/ImageSlider';
+import ServiceSpaceDetailInfo from './components/ServiceSpaceInfo';
+import { SpaceAmenity } from './components/SpaceAmenity';
 import { SpaceInfor } from './components/SpaceInfo';
 import { SpaceRelated } from './components/SpaceRelated';
+import { SubSpaceList } from './components/SubSpace';
 import { SpaceDetailWrapper } from './styles';
 
 export const SpaceDetail = () => {
@@ -60,6 +62,10 @@ export const SpaceDetail = () => {
     })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
+
+  const handleBooking = () => {
+
+  }
 
   return (
     <>
@@ -132,17 +138,40 @@ export const SpaceDetail = () => {
                   <div className='space-overview'>
                     <SpaceInfor data={space} />
                   </div>
+                  <div className='space-amenity'>
+                    <div className='space-amenity-title'>Space Amenities</div>
+                    <div className='space-amenity-detail'>
+                      <SpaceAmenity data={space} />
+                    </div>
+                  </div>
                 </div>
 
                 <div  className='space-detail-com2'>
                   <div className="space-starting-con">Starting at</div>
                   <h5>{formatPrice(space?.price)}/{space.unit}</h5>
-                  <Button type='primary' ghost size='large' className='booking-space'>
+                  <Button type='primary' ghost size='large' className='booking-space' onClick={handleBooking} >
                   {' '}
                     BOOKING NOW{' '}
                   </Button>
                 </div>
               </div>
+
+              <div className='space-service'>
+                {(space?.serviceSpaces)?.map((serviceSpace) => {
+                    return (
+                      <div className='space-service-detail'>
+                        <div className='space-service-com1'>
+                          <ServiceSpaceDetailInfo key={serviceSpace.id} serviceSpace={serviceSpace} />
+                        </div>
+                        <div className='space-service-com2'>
+                          <SubSpaceList key={serviceSpace.id} serviceSpace={serviceSpace} />
+                        </div>
+                      </div>
+                    )
+                })}
+                
+              </div>
+              
               <div className='space-comments'>
                 <div className='title'>Comment and feedback </div>
                 <CommentComponent spaceId={Number(id)} />

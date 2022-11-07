@@ -184,3 +184,10 @@ export interface SpacePayment {
   expiredTime: Date
   outOfDate: boolean
 }
+
+export interface MatchSubSpace {
+  numberOfPeople: number
+  startDate: Date
+  endDate: Date
+  spaceId: number
+}

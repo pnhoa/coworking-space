@@ -4,10 +4,13 @@ import { Modal } from 'antd'
 export const ModalWrapper = styled(Modal)`
   min-height: 30%;
   max-width: calc(100vw - 16px);
+  top: 250px;
 
   .ant-modal-header {
     border: none;
     height: 70px;
+    padding-top: 35px;
+    padding-bottom: 50px;
   }
 
   .header-modal {
@@ -32,10 +35,16 @@ export const ModalWrapper = styled(Modal)`
     overflow-y: auto;
   }
 
-  .ant-modal-title,
   .ant-modal-close,
   .ant-modal-close-icon {
     font-size: 18px;
+  }
+
+  .ant-modal-title {
+    font-size: 40px;
+    color: #333;
+    text-align: center;
+
   }
 
   .multi-upload-wrapper .ant-form-item:not(:first-child) {

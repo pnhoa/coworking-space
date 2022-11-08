@@ -4,6 +4,7 @@ import ModalCustom from "components/ModalCustom"
 import { MatchSubSpace } from "interfaces"
 import { ModalForwardRefHandle } from "interfaces/modal"
 import React, { useImperativeHandle, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { MatchSubSpaceForm } from "./MatchSubSpaceForm"
 
 
@@ -12,8 +13,10 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
     ref, 
   ) => {
     const [form] = Form.useForm()
+
+    const navigate = useNavigate()
   
-    let data = []
+    let data: string | any[] = []
     let matchSubSpace: MatchSubSpace
   
     const [loading, setLoading] = useState(false)
@@ -55,7 +58,8 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
             setLoading(false)
             form.resetFields()
           } else {
-            handleClose()
+            handleClose();
+            navigate('/spaces/booking', {state:{matchSubSpace: matchSubSpace, subSpaceList: data}})
           }
         })
         .catch((error) => {

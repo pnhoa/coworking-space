@@ -4,7 +4,7 @@ import loadingReducer from 'redux/loadingSlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  loading: loadingReducer,
+  loading: loadingReducer
 });
 
 export const store = configureStore({

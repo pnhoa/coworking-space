@@ -5,6 +5,7 @@ import { ProfilePage } from 'containers/Profile';
 import { Route } from 'react-router-dom';
 import { TPublicRoutes } from 'routes/interface';
 import { SpaceDetail } from 'containers/SpaceDetail';
+import BookingSpace from 'containers/Space/BookingSpace';
 
 export const PUBLIC_ROUTES: TPublicRoutes = [
   {
@@ -20,6 +21,11 @@ export const PUBLIC_ROUTES: TPublicRoutes = [
   {
     path: '/login',
     element: <LoginPage />,
+    exact: true,
+  },
+  {
+    path: '/spaces/booking',
+    element: <BookingSpace />,
     exact: true,
   },
   {

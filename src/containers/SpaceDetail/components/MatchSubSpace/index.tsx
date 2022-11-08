@@ -68,7 +68,7 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
       <ModalCustom
         title='Find Match Sub Space'
         onCancel={handleClose}
-        open={visible} 
+        visible={visible} 
         onOk={handleChangePassword}
         okButtonProps={{ loading }}
       >

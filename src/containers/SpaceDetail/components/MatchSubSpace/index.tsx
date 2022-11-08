@@ -1,10 +1,9 @@
 import { Form, notification } from "antd"
+import spaceApi from "api/spaceApi"
 import ModalCustom from "components/ModalCustom"
 import { MatchSubSpace } from "interfaces"
 import { ModalForwardRefHandle } from "interfaces/modal"
-import moment from "moment"
 import React, { useImperativeHandle, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { MatchSubSpaceForm } from "./MatchSubSpaceForm"
 
 
@@ -14,7 +13,8 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
   ) => {
     const [form] = Form.useForm()
   
-    const push  = useNavigate()
+    let data = []
+    let matchSubSpace: MatchSubSpace
   
     const [loading, setLoading] = useState(false)
     const [visible, setVisible] = useState<boolean>(false)
@@ -35,24 +35,28 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
     const handleChangePassword = () => {
       form
         .validateFields()
-        .then(({...values }) => {
+        .then( async ({...values }) => {
           const [startDateMoment, endDateMoment] = values.range_picker
-          const startDate = startDateMoment.format("YYYY-MM-DD HH:mm:ss")
-          const endDate = endDateMoment.format("YYYY-MM-DD HH:mm:ss")
-          const matchSubSpace : MatchSubSpace = {
+          const startDate = startDateMoment.format("YYYY-MM-DDTHH:mm:SS")
+          const endDate = endDateMoment.format("YYYY-MM-DDTHH:mm:SS")
+          matchSubSpace  = {
             numberOfPeople: values.numberOfPeople,
             startDate: startDate,
             endDate: endDate,
-            spaceId: 1
+            spaceId: Number(localStorage.getItem('spaceId'))
           }
-          console.log(matchSubSpace)
-          setLoading(true)
+          data = await spaceApi.findMatchSubSpace(matchSubSpace)
           
         })
         .then(async (response: any) => {
-          notification.success({ message: response.message })
-          setLoading(false)
-          handleClose()
+          if(data.length === 0) {
+            notification.warning({message: "Not match any sub space",
+            placement: 'bottomRight'})
+            setLoading(false)
+            form.resetFields()
+          } else {
+            handleClose()
+          }
         })
         .catch((error) => {
           setLoading(false)
@@ -68,12 +72,7 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
         onOk={handleChangePassword}
         okButtonProps={{ loading }}
       >
-        <Form form={form} layout='vertical' initialValues={{
-          range_picker: [
-            moment('2022-01-13 08:00:00', "YYYY-MM-DD HH:mm:ss"),
-            moment('2022-01-15 08:00:00', "YYYY-MM-DD HH:mm:ss"),
-          ],
-        }}>
+        <Form form={form} layout='vertical'>
           <MatchSubSpaceForm />
         </Form>
       </ModalCustom>

@@ -1,4 +1,4 @@
-import { ApiResponse, ListParams, ListResponse, MatchSubSpace, Space, SpaceDetail } from 'interfaces';
+import { ApiResponse, ListParams, ListResponse, MatchSubSpace, Space, SpaceDetail, SubSpace } from 'interfaces';
 import axiosClient from './axiosClient';
 
 const spaceApi = {
@@ -21,7 +21,9 @@ const spaceApi = {
   },
 
   async findMatchSubSpace(payload: MatchSubSpace) {
-    await axiosClient.post('/spaces/find', { ...payload });
+    const data : SubSpace[] = await axiosClient.post('/spaces/find', JSON.stringify(payload));
+
+    return data
   },
   
 };

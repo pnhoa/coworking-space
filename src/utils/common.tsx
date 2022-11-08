@@ -15,5 +15,13 @@ export const formatDate = (text?: string) => {
   return dateTime.isSame(moment(), 'year')
     ? dateTime.format(`MMM D, ${formatTime}`)
     : dateTime.format(`MMM D YYYY, ${formatTime}`);
-};
+}
 
+export const parserInputNumber = (value: string | undefined): string => {
+  return value ? value.replace(/\$\s?|(,*)/g, '') : ''
+}
+
+export const formatterNumber = (val: string | undefined) => {
+  if (!val) return 0;
+  return `${val}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace(/\.(?=\d{0,2}$)/g, ",");
+}

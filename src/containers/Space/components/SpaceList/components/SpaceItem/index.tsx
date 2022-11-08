@@ -12,9 +12,13 @@ interface Props {
 
 export const SpaceItem: React.FC<Props> = (props) => {
   const { item } = props;
+
+  const handleSpaceId = () => {
+    localStorage.setItem("spaceId", (item.id).toString())
+  }
   return (
     <SpaceItemWrapper>
-      <Link to={`/space/${item.id}`} className='home__productitems'>
+      <Link to={`/space/${item.id}`} className='home__productitems' onClick={handleSpaceId}>
         <div
           className='home__productitemsimg'
           style={{ backgroundImage: `url(${item.largeImage})`}}

@@ -1,11 +1,10 @@
-import { CompassOutlined } from '@ant-design/icons';
+import { CalendarOutlined, CompassOutlined } from '@ant-design/icons';
 import { Rate } from 'antd';
 import categoryApi from 'api/categoryApi';
 import ReadMore from 'components/ReadMore';
 import { SpaceDetailWrapper } from 'containers/SpaceDetail/styles';
 import { SpaceDetail } from 'interfaces';
 import React, { useEffect, useState } from 'react';
-import { formatPrice } from 'utils/common';
 
 interface Props {
   data: SpaceDetail;
@@ -29,6 +28,10 @@ export const SpaceInfor: React.FC<Props> = ({ data }) => {
     <SpaceDetailWrapper>
       <div>
         <h1 className='ProductName'>{space?.name}</h1>
+        <div className='spaceJoinDate'>
+          <CalendarOutlined /> 
+          <p className='spaceJoinDateDetail'>{space.spaceDescription.openingDate}</p>
+        </div>
         <div className='spaceAddress'>
           <CompassOutlined />
           <p  className='spaceAddressDetail'> {space.spaceAddress.addressLine1}, {space.spaceAddress.district}, {space.spaceAddress.province}, {space.spaceAddress.country}</p>
@@ -37,7 +40,7 @@ export const SpaceInfor: React.FC<Props> = ({ data }) => {
         <ReadMore  child={(space?.spaceDescription.description).toString()}></ReadMore>
         <div className='ProductTable'>
           <div className='ProductTableRow'>
-            <span className='ProductItem'>Category</span>
+            <span className='ProductItem'>Service Type</span>
             <span className='ProductItem'>{categoryName}</span>
           </div>
           <div className='ProductTableRow'>

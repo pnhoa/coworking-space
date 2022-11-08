@@ -92,6 +92,17 @@ export const SpaceDetailWrapper = styled.div`
   .spaceAddressDetail {
     margin-left: 10px
   }
+  .spaceJoinDate {
+    display: flex;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.0;
+    margin-bottom: 10px;
+    color: rgb(0,158,127);
+  }
+  .spaceJoinDateDetail {
+    margin-left: 10px
+  }
   .ProductBand {
     font-family: Lato, sans-serif;
     font-size: 15px;
@@ -436,12 +447,53 @@ export const SpaceDetailWrapper = styled.div`
   }
   .space-detail-com2 {
     width: 25%;
-    margin: 10px 50px 200px 20px !important;
+    margin: 10px 50px 400px 20px !important;
     padding: 30px 30px !important;
     display: inline-block;
     background: #fff;
     border: 1px solid #e5e5e5;
     box-shadow: 1px 1px 1px 1px #e3dcdc;
+  }
+  .space-service {
+    width: 100%;
+    display: flex
+  }
+  .space-service-detail {
+    width: 100%;
+    display: flex
+  }
+  .space-service-com1 {
+    width: 15%;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+  }
+  .space-service-com2 {
+    width: 85%;
+    margin-left: 0px;
+  }
+  .space-amenity {
+    width: 100%;
+    margin: 20px 0 !important;
+    padding: 10px 20px !important;
+    background-color: #fcfcfc;
+    
+  }
+  .space-amenity-title {
+    margin: 10px 25px;
+    margin-left: 44px;
+    font-size: 21px;
+    font-weight: 600;
+    color: #000;
+  }
+  .space-amenity-detail {
+    margin: 10px 25px;
+    margin-left: 44px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
   }
   .space-starting-con {
       font-weight: 600;
@@ -465,6 +517,10 @@ export const SpaceDetailWrapper = styled.div`
     color: #FFFFFF;
     background-color: #08966b;
   }
+  .ant-btn-background-ghost.ant-btn-primary {
+    background-color: #08966b;
+    color: #FFFFFF;
+  }
   
   .booking-space:hover {
     color: #08966b;
@@ -476,7 +532,7 @@ export const SpaceDetailWrapper = styled.div`
     width: 100%;
     margin: 20px 0 !important;
     padding: 10px 20px !important;
-    background-color: #f7f7f7;
+    background-color: #fcfcfc;
 
     & > .title {
       margin: 10px 25px;
@@ -495,6 +551,6 @@ export const SpaceDetailWrapper = styled.div`
     width: 100%;
     margin: 10px 0 !important;
     padding: 10px 80px 10px 80px !important;
-    background-color: #f7f7f7;
+    background-color: #fcfcfc;
   }
 `;

@@ -9,7 +9,7 @@ interface Props {
     customer?: User;
     matchSubSpace: MatchSubSpace;
     subSpace: SubSpace
-  }
+}
 
 export const BookingPrice : React.FC<Props> = ({ customer, matchSubSpace, subSpace }) => {
 

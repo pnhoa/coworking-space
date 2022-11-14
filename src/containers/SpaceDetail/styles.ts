@@ -466,7 +466,7 @@ export const SpaceDetailWrapper = styled.div`
     width: 15%;
     background: #ffffff;
     border-radius: 16px;
-    padding: 20px;
+    padding: 10px;
     margin-bottom: 20px;
     margin-left: 40px;
   }

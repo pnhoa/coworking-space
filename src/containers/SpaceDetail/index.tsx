@@ -167,9 +167,10 @@ export const SpaceDetail = () => {
                   </div>
                 </div>
 
-                <div className='space-service'>
+                
                   {(space?.serviceSpaces)?.map((serviceSpace) => {
                       return (
+                        <div className='space-service'>
                         <div className='space-service-detail' key={serviceSpace.id}>
                           <div className='space-service-com1'>
                             <ServiceSpaceDetailInfo serviceSpace={serviceSpace} />
@@ -178,10 +179,11 @@ export const SpaceDetail = () => {
                             <SubSpaceList  serviceSpace={serviceSpace} customerId={customerId ? customerId : "0"} />
                           </div>
                         </div>
+                        </div>
                       )
                   })}
                   
-                </div>
+                
                 
                 <div className='space-comments'>
                   <div className='title'>Comment and feedback </div>

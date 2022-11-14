@@ -45,6 +45,11 @@ export const getTotalPriceAndNumberTimePerUnit = (subSpace: SubSpace, matchSubSp
       totalCost = months * subSpace.price
       numberTimePerUnit = months
   }
+  if(subSpace.package?.type === 'Year') {
+    var years = Math.ceil(Math.abs(new Date(matchSubSpace.endDate).getTime() - new Date(matchSubSpace.startDate).getTime()) / (3600000 * 24 * 30 * 365));
+    totalCost = years * subSpace.price
+    numberTimePerUnit = years
+}
 
   return [totalCost, numberTimePerUnit]
 }

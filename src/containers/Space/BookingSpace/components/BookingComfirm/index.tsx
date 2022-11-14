@@ -9,7 +9,13 @@ import { MatchSubSpace, SubSpace, User } from "interfaces";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BookingStyles } from "../../styles";
 
-
+interface CustomState {
+    matchSubSpace: MatchSubSpace,
+    subSpace: SubSpace,
+    customer: User,
+    totalPrice: number,
+    numberTimePerUnit: number
+}
 
 export const BookingConfirm = () => {
 
@@ -18,11 +24,13 @@ export const BookingConfirm = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const matchSubSpace: MatchSubSpace = location.state.matchSubSpace
-    const subSpace: SubSpace = location.state.subSpace
-    const customer: User = location.state.customer
-    const totalPrice: number = location.state.totalPrice
-    const numberTimePerUnit = location.state.numberTimePerUnit
+    const state = location.state as CustomState
+
+    const matchSubSpace: MatchSubSpace = state.matchSubSpace
+    const subSpace: SubSpace = state.subSpace
+    const customer: User = state.customer
+    const totalPrice: number = state.totalPrice
+    const numberTimePerUnit: number = state.numberTimePerUnit
 
     const onFinish = async (values: any) => {
         form

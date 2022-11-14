@@ -11,6 +11,10 @@ import { SpaceDetailWrapper } from "containers/SpaceDetail/styles";
 import SubSpaceDetail from "./components/SubSpaceDetail";
 import { BookingPrice } from "./components/BookingPrice";
 
+interface CustomState {
+    matchSubSpace: MatchSubSpace,
+    subSpaceList: SubSpace[]
+}
 
 const BookingSpace = () => {
 
@@ -19,8 +23,10 @@ const BookingSpace = () => {
     const [customer, setCustomer] = useState<User>();
     const navigate = useNavigate();
 
-    const matchSubSpace: MatchSubSpace = location.state.matchSubSpace
-    const subSpaceList: SubSpace[] = location.state.subSpaceList
+    const state = location.state as CustomState
+
+    const matchSubSpace: MatchSubSpace = state.matchSubSpace
+    const subSpaceList: SubSpace[] = state.subSpaceList
 
     const [subSpace, setSubSpace] = useState(subSpaceList[0])
 

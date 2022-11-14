@@ -1,15 +1,19 @@
-import { Button, Image } from 'antd';
+import { Button, Image, notification } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import TableCustom from 'components/TableCustom';
 import { Package, ServiceSpace, SubSpace } from 'interfaces';
-import React from 'react';
+import { ModalForwardRefHandle } from 'interfaces/modal';
+import React, { useRef } from 'react';
 import { formatPrice } from 'utils/common';
 import { SubSpaceWrapper } from './styles';
+import   MatchSubSpaceModal from '../MatchSubSpace'
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   serviceSpace: ServiceSpace;
+  customerId: string
 }
-export const SubSpaceList: React.FC<Props> = ({ serviceSpace }) => {
+export const SubSpaceList: React.FC<Props> = ({ serviceSpace, customerId }) => {
 
   const packages : Package[] = serviceSpace?.packages ? serviceSpace?.packages?.map((item) => ({
     id: item?.id,
@@ -17,6 +21,9 @@ export const SubSpaceList: React.FC<Props> = ({ serviceSpace }) => {
     note: item?.note,
     subSpaces: item?.subSpaces
   }))  : []
+
+  const matchSubSpaceModalRef = useRef<ModalForwardRefHandle>(null)
+  const navigate = useNavigate()
 
   const subSpaceInfo: SubSpace[] = []
 
@@ -28,7 +35,13 @@ export const SubSpaceList: React.FC<Props> = ({ serviceSpace }) => {
   })
 
   const handleBooking = () => {
-
+    if(Number(customerId) === 0){
+      setTimeout(() => {
+        notification.error({ message:"Please login!!"})
+        navigate('/login') }, 500);
+    } else {
+      matchSubSpaceModalRef.current && matchSubSpaceModalRef.current.open()
+    }
   }
 
 
@@ -89,6 +102,7 @@ export const SubSpaceList: React.FC<Props> = ({ serviceSpace }) => {
   return (
     <SubSpaceWrapper>
         <TableCustom columns={columns} data={subSpaceInfo} />
+        <MatchSubSpaceModal ref={matchSubSpaceModalRef} />
     </SubSpaceWrapper>
   );
 };

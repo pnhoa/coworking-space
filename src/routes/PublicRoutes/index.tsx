@@ -6,6 +6,8 @@ import { Route } from 'react-router-dom';
 import { TPublicRoutes } from 'routes/interface';
 import { SpaceDetail } from 'containers/SpaceDetail';
 import BookingSpace from 'containers/Space/BookingSpace';
+import { BookingConfirm } from 'containers/Space/BookingSpace/components/BookingComfirm';
+import { BookingHistory } from 'containers/Space/BookingHistory';
 
 export const PUBLIC_ROUTES: TPublicRoutes = [
   {
@@ -24,8 +26,19 @@ export const PUBLIC_ROUTES: TPublicRoutes = [
     exact: true,
   },
   {
-    path: '/spaces/booking',
+    path: '/space/booking',
     element: <BookingSpace />,
+    exact: true,
+  },
+  {
+    path: '/space/checkout',
+    element: <BookingConfirm />,
+    exact: true,
+  },
+  
+  {
+    path: '/booking/history',
+    element: <BookingHistory />,
     exact: true,
   },
   {

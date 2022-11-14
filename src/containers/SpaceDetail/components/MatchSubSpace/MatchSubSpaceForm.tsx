@@ -10,6 +10,7 @@ export const MatchSubSpaceForm = () => {
           <Form.Item
             name='numberOfPeople'
             label='How many people is the office for?'
+            initialValue="1"
             rules={[{ required: true, message: 'Please enter number of people' }]}
             >
           <InputNumber
@@ -24,11 +25,11 @@ export const MatchSubSpaceForm = () => {
             >
                 <RangePicker
                   disabledDate={(current) => {
-                    let customDate = moment().format("YYYY-MM-DD");
-                    return current && current < moment(customDate, "YYYY-MM-DD");
+                    let customDate = moment().format("YYYY-MM-DD HH:mm:ss");
+                    return current && current < moment(customDate, "YYYY-MM-DD HH:mm:ss");
                   }} 
-                  showTime={{ format: 'HH:mm:ss' }}
-                  format="YYYY-MM-DD HH:mm:ss"
+                  showTime={{ format: 'HH:00:00' }}
+                  format="YYYY-MM-DD HH:00:00"
                 />
           </Form.Item>
       </div>

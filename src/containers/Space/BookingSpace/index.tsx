@@ -5,8 +5,11 @@ import { MatchSubSpace, SubSpace, User } from "interfaces";
 import { useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { BookingStyles } from "./styles";
-import { notification } from "antd";
+import { Col, notification, Row } from "antd";
 import { userApi } from "api/userApi";
+import { SpaceDetailWrapper } from "containers/SpaceDetail/styles";
+import SubSpaceDetail from "./components/SubSpaceDetail";
+import { BookingPrice } from "./components/BookingPrice";
 
 
 const BookingSpace = () => {
@@ -18,6 +21,8 @@ const BookingSpace = () => {
 
     const matchSubSpace: MatchSubSpace = location.state.matchSubSpace
     const subSpaceList: SubSpace[] = location.state.subSpaceList
+
+    const [subSpace, setSubSpace] = useState(subSpaceList[0])
 
     const customerId = Number(localStorage.getItem('id'));
     useEffect(() => {
@@ -32,31 +37,62 @@ const BookingSpace = () => {
         setCustomer(user);
         setLoading(false);
         })();
-    }, []);
+    }, [customerId, navigate]);
+
+    const handleChangeSubSPace = (subSpaceId: number) => {
+        console.log("Goi tai master")
+        const match = subSpaceList.find(x => x.id === subSpaceId)
+        setSubSpace(match ? match : subSpaceList[0] )
+        
+    }
 
     return (
-        <BookingStyles>
-            {loading ? (
-                <Loading />
-            ) : (
-                <>
-                <NavBar />
-                <div className='content'>
-                    <h1 className='title'>BOOKING SPACE</h1>
-                    <div className='container'>
-                    {
-                        console.log(matchSubSpace)
-                        
-                    }
-                    {
-                        console.log(subSpaceList)
-                    }
-                    </div>
-                </div>
-                <Footer />
-                </>
-            )}
-        </BookingStyles>
+        <SpaceDetailWrapper>
+            <BookingStyles>
+                {loading ? (
+                    <Loading />
+                ) : (
+                    <>
+                    <NavBar />
+                        <div className='container'>
+                        <h1 className='title'>BOOKING SPACE</h1>
+                        {
+                            subSpaceList.length ? (
+                                <div>
+                                <Row>
+                                    <Col span={17}>
+                                        <SubSpaceDetail
+                                            subSpaceList={subSpaceList}
+                                            onChangeSub={handleChangeSubSPace}
+                                        />
+                                    </Col>
+                                    <Col span={7}>
+                                        <BookingPrice customer={customer} matchSubSpace={matchSubSpace}
+                                        subSpace={subSpace}></BookingPrice>
+                                    </Col>  
+                                </Row>
+                                </div>
+                            ) : (
+                                <div className='cart-detail-empty'>
+                                <img
+                                    src='https://salt.tikicdn.com/desktop/img/mascot@2x.png'
+                                    alt=''
+                                    style={{ width: '200px' }}
+                                />
+                                <p style={{ marginTop: '10px' }}>No space can booking</p>
+                                <div style={{ paddingTop: '10px' }}>
+                                    <a href='/'>Booking space</a>
+                                </div>
+                                </div>
+                            )
+                            }
+                        </div>
+                    <Footer />
+                    </>
+                )}
+            </BookingStyles>
+        </SpaceDetailWrapper>
+        
     )
 }
 

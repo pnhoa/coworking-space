@@ -40,8 +40,8 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
         .validateFields()
         .then( async ({...values }) => {
           const [startDateMoment, endDateMoment] = values.range_picker
-          const startDate = startDateMoment.format("YYYY-MM-DDTHH:mm:SS")
-          const endDate = endDateMoment.format("YYYY-MM-DDTHH:mm:SS")
+          const startDate = startDateMoment.format("YYYY-MM-DDTHH:00:00")
+          const endDate = endDateMoment.format("YYYY-MM-DDTHH:00:00")
           matchSubSpace  = {
             numberOfPeople: values.numberOfPeople,
             startDate: startDate,
@@ -59,7 +59,7 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
             form.resetFields()
           } else {
             handleClose();
-            navigate('/spaces/booking', {state:{matchSubSpace: matchSubSpace, subSpaceList: data}})
+            navigate('/space/booking', {state:{matchSubSpace: matchSubSpace, subSpaceList: data}})
           }
         })
         .catch((error) => {

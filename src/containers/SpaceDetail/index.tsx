@@ -175,7 +175,7 @@ export const SpaceDetail = () => {
                             <ServiceSpaceDetailInfo serviceSpace={serviceSpace} />
                           </div>
                           <div className='space-service-com2' >
-                            <SubSpaceList  serviceSpace={serviceSpace} />
+                            <SubSpaceList  serviceSpace={serviceSpace} customerId={customerId ? customerId : "0"} />
                           </div>
                         </div>
                       )

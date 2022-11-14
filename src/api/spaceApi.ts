@@ -25,6 +25,11 @@ const spaceApi = {
 
     return data
   },
+
+  bookingSubSpace(payload: any) {
+    console.log(JSON.stringify(payload))
+    return axiosClient.post('/bookings', JSON.stringify(payload));
+  },
   
 };
 export default spaceApi;

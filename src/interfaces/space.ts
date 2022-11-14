@@ -161,6 +161,7 @@ export interface SubSpace {
   packageId?: number
   packageType?: string
   package?: Package
+  spaceId?: number
 }
 
 export interface Image {

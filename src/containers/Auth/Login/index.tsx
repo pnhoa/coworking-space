@@ -20,7 +20,7 @@ const LoginPage: FC = () => {
       notification.success({
         message: 'Login successfully!',
       });
-      navigate('/');
+      navigate(-1);
     } catch (error: any) {
       notification.error({
         message: `${error.message}`,

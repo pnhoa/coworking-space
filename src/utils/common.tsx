@@ -1,3 +1,4 @@
+import { MatchSubSpace, SubSpace } from 'interfaces';
 import moment from 'moment';
 
 export const formatPrice = (price: number) => {
@@ -24,4 +25,26 @@ export const parserInputNumber = (value: string | undefined): string => {
 export const formatterNumber = (val: string | undefined) => {
   if (!val) return 0;
   return `${val}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace(/\.(?=\d{0,2}$)/g, ",");
+}
+
+export const getTotalPriceAndNumberTimePerUnit = (subSpace: SubSpace, matchSubSpace: MatchSubSpace) => {
+  let totalCost = 0;
+  let numberTimePerUnit = 0;
+  if(subSpace.package?.type === 'Hour') {
+      var hours = Math.ceil(Math.abs(new Date(matchSubSpace.endDate).getTime() - new Date(matchSubSpace.startDate).getTime()) / 3600000);
+      totalCost = hours * subSpace.price
+      numberTimePerUnit = hours
+  }
+  if(subSpace.package?.type === 'Day') {
+      var days = Math.ceil(Math.abs(new Date(matchSubSpace.endDate).getTime() - new Date(matchSubSpace.startDate).getTime()) / (3600000 * 24));
+      totalCost = days * subSpace.price
+      numberTimePerUnit = days
+  }
+  if(subSpace.package?.type === 'Month') {
+      var months = Math.ceil(Math.abs(new Date(matchSubSpace.endDate).getTime() - new Date(matchSubSpace.startDate).getTime()) / (3600000 * 24 * 30));
+      totalCost = months * subSpace.price
+      numberTimePerUnit = months
+  }
+
+  return [totalCost, numberTimePerUnit]
 }

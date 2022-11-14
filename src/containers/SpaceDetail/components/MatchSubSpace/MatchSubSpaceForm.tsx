@@ -1,4 +1,5 @@
 import { DatePicker, Form, InputNumber} from "antd"
+import moment from "moment";
 import { parserInputNumber } from "utils/common"
 
 const { RangePicker } = DatePicker;
@@ -9,6 +10,7 @@ export const MatchSubSpaceForm = () => {
           <Form.Item
             name='numberOfPeople'
             label='How many people is the office for?'
+            initialValue="1"
             rules={[{ required: true, message: 'Please enter number of people' }]}
             >
           <InputNumber
@@ -22,8 +24,12 @@ export const MatchSubSpaceForm = () => {
             rules={[{ required: true, message: 'Please select date' }]}
             >
                 <RangePicker
-                  showTime={{ format: 'HH:mm:ss' }}
-                  format="YYYY-MM-DD HH:mm:ss"
+                  disabledDate={(current) => {
+                    let customDate = moment().format("YYYY-MM-DD HH:mm:ss");
+                    return current && current < moment(customDate, "YYYY-MM-DD HH:mm:ss");
+                  }} 
+                  showTime={{ format: 'HH:00:00' }}
+                  format="YYYY-MM-DD HH:00:00"
                 />
           </Form.Item>
       </div>

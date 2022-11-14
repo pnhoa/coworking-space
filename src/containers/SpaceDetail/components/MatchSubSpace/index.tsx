@@ -4,6 +4,7 @@ import ModalCustom from "components/ModalCustom"
 import { MatchSubSpace } from "interfaces"
 import { ModalForwardRefHandle } from "interfaces/modal"
 import React, { useImperativeHandle, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { MatchSubSpaceForm } from "./MatchSubSpaceForm"
 
 
@@ -12,8 +13,10 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
     ref, 
   ) => {
     const [form] = Form.useForm()
+
+    const navigate = useNavigate()
   
-    let data = []
+    let data: string | any[] = []
     let matchSubSpace: MatchSubSpace
   
     const [loading, setLoading] = useState(false)
@@ -37,8 +40,8 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
         .validateFields()
         .then( async ({...values }) => {
           const [startDateMoment, endDateMoment] = values.range_picker
-          const startDate = startDateMoment.format("YYYY-MM-DDTHH:mm:SS")
-          const endDate = endDateMoment.format("YYYY-MM-DDTHH:mm:SS")
+          const startDate = startDateMoment.format("YYYY-MM-DDTHH:00:00")
+          const endDate = endDateMoment.format("YYYY-MM-DDTHH:00:00")
           matchSubSpace  = {
             numberOfPeople: values.numberOfPeople,
             startDate: startDate,
@@ -55,7 +58,8 @@ const MatchSubSpaceModal : React.ForwardRefRenderFunction<ModalForwardRefHandle,
             setLoading(false)
             form.resetFields()
           } else {
-            handleClose()
+            handleClose();
+            navigate('/space/booking', {state:{matchSubSpace: matchSubSpace, subSpaceList: data}})
           }
         })
         .catch((error) => {

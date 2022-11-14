@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { Button, Col, Image } from 'antd';
+import { Button, Col, Image, notification } from 'antd';
 import spaceApi from 'api/spaceApi';
 import { Footer } from 'components/Footer';
 import NavBar from 'components/Header';
@@ -8,7 +8,7 @@ import { Loading } from 'components/Loading';
 import { SpaceDetail as Space, Space as SpaceOverview } from 'interfaces';
 import { ModalForwardRefHandle } from 'interfaces/modal';
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { formatPrice } from 'utils/common';
 import { CommentComponent } from './components/Comment';
 import ServiceSpaceDetailInfo from './components/ServiceSpaceInfo';
@@ -27,6 +27,7 @@ export const SpaceDetail = () => {
   const [images, setImages] =  useState<string[]>([]);
   const [spaceRelatedList, setSpaceRelatedList] = useState([] as SpaceOverview[]);
   const customerId = localStorage.getItem('id');
+  const navigate = useNavigate()
 
   const { id } = useParams();
 
@@ -68,7 +69,13 @@ export const SpaceDetail = () => {
   }, [location.pathname]);
 
   const handleBooking = () => {
-    matchSubSpaceModalRef.current && matchSubSpaceModalRef.current.open()
+    if(Number(customerId) === 0){
+      setTimeout(() => {
+        notification.error({ message:"Please login!!"})
+        navigate('/login') }, 500);
+    } else {
+      matchSubSpaceModalRef.current && matchSubSpaceModalRef.current.open()
+    }
   }
 
   return (
@@ -168,7 +175,7 @@ export const SpaceDetail = () => {
                             <ServiceSpaceDetailInfo serviceSpace={serviceSpace} />
                           </div>
                           <div className='space-service-com2' >
-                            <SubSpaceList  serviceSpace={serviceSpace} />
+                            <SubSpaceList  serviceSpace={serviceSpace} customerId={customerId ? customerId : "0"} />
                           </div>
                         </div>
                       )

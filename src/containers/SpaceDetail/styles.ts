@@ -521,6 +521,10 @@ export const SpaceDetailWrapper = styled.div`
     background-color: #08966b;
     color: #FFFFFF;
   }
+  .ant-btn-background-ghost.ant-btn-primary:hover {
+    color: #08966b;
+    background-color: #FFFFFF;
+  }
   
   .booking-space:hover {
     color: #08966b;

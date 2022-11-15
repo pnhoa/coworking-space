@@ -1,4 +1,5 @@
-import { MatchSubSpace, SubSpace } from 'interfaces';
+import { Tag } from 'antd';
+import { BOOKING_STATUS, MatchSubSpace, Status, SubSpace } from 'interfaces';
 import moment from 'moment';
 
 export const formatPrice = (price: number) => {
@@ -53,3 +54,9 @@ export const getTotalPriceAndNumberTimePerUnit = (subSpace: SubSpace, matchSubSp
 
   return [totalCost, numberTimePerUnit]
 }
+
+export const formatBookingStatus = (data: string) => {
+  if (!data) return null;
+  const restItem = BOOKING_STATUS.find((item) => String(Status[item.value]) === data);
+  return <Tag color={restItem?.colorText}>{restItem?.text ? restItem.text : data}</Tag>;
+};

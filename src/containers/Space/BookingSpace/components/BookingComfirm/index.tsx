@@ -1,6 +1,6 @@
 
 import { Button, Form, Input, notification } from "antd";
-import spaceApi from "api/spaceApi";
+import bookingApi from "api/bookingApi";
 import { Footer } from "components/Footer";
 import NavBar from "components/Header";
 import { SpaceDetailWrapper } from "containers/SpaceDetail/styles";
@@ -36,7 +36,7 @@ export const BookingConfirm = () => {
         form
         .validateFields()
         .then( async ({...values }) => {
-        return spaceApi.bookingSubSpace(values)
+        return bookingApi.bookingSubSpace(values)
         })
         .then(async (response: any) => {
             notification.info({message: "Booking successfully!"})

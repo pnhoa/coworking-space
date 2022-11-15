@@ -17,7 +17,6 @@ const SubSpaceDetail: React.FC<Props> = ({ subSpaceList, onChangeSub })=> {
 
 
     const onChange = ({ target: { value } }: RadioChangeEvent) => {
-        console.log('checked ', value);
         setCheckedSubSpace(value);
         onChangeSub(value)
     };

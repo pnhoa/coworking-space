@@ -13,14 +13,9 @@ export default styled.div`
     --header-height: 120px;
     --header-search: calc(var(--header-height) - var(--navbar-height));
   }
-  .slider {
-    background-image: url('https://gvn360.com/wp-content/uploads/2020/07/d6f28492b786d1ee2fdc5296f4c21848-1.jpg');
-    height: 500px; /* You must set a specified height */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat;
-  }
+
   .container {
-    padding-top: 120px;
+    padding: 120px 100px 0;
     background-color: #f8f8f8;
     padding-bottom: 30px;
     /* padding: 78px 0px 60px; */
@@ -361,12 +356,15 @@ export default styled.div`
       }
     }
   }
-  .ant-btn-background-ghost.ant-btn-primary {
-    background-color: #08966b;
-    color: #FFFFFF;
+
+  .ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
+    background:  rgb(8, 150, 107);
   }
-  .ant-btn-background-ghost.ant-btn-primary:hover {
-    color: #08966b;
-    background-color: #FFFFFF;
+
+  .ant-steps-item-finish .ant-steps-item-icon {
+    background-color: #fff;
+    color: rgb(8, 150, 107);
+    border-color: rgb(8, 150, 107);
   }
+  
 `;

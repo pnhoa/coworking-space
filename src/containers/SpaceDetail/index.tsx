@@ -102,6 +102,7 @@ export const SpaceDetail = () => {
                       <Image
                         src={ images[0] ? images[0] : `no-data.jpeg`}
                         alt='image'
+                        preview ={false}
                         style={{
                           width: '720px',
                           height: '360px',
@@ -122,22 +123,25 @@ export const SpaceDetail = () => {
                       <Image className='image-detail'
                         src={ images[1] ? images[1] : `no-data.jpeg`}
                         alt='image'
+                        preview ={false}
                       />
                       <Image className='image-detail'
                         src={ images[2] ? images[2] : `no-data.jpeg`}
                         alt='image'
+                        preview ={false}
                       />
                     </div>
                     <div className='ProductTableRow'>
                       <Image className='image-detail'
                         src={ images[3] ? images[3] : `no-data.jpeg`}
                         alt='image'
-                        
+                        preview ={false}
                       />
                       {images[4] ?
                         <Image className='image-detail'
                           src={ images[4] ? images[4] : `./default.png`}
                           alt='image'
+                          preview ={false}
                         />
                         : <></>}
                     </div>

@@ -91,7 +91,7 @@ export const BookingHistoryDetail: React.FC<Props> = ({ bookings, customerId, on
               <Col span={3}>{formatDate(item.createdDate?.toString())}</Col>
               <Col span={3}>{formatDate(item.startDate.toString())}</Col>
               <Col span={3}>{formatDate(item.endDate.toString())}</Col>
-              <Col span={3} style={{ fontWeight: 'bold', color: '#1890ff' }}>
+              <Col span={3} style={{ fontWeight: 'bold', color: '#00927c', fontSize: '16px' }}>
                 {formatPrice(item.totalPrice)}
               </Col>
               <Col span={2}>{formatBookingStatus(String(item.status))}</Col>

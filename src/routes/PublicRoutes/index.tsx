@@ -8,6 +8,7 @@ import { SpaceDetail } from 'containers/SpaceDetail';
 import BookingSpace from 'containers/Space/BookingSpace';
 import { BookingConfirm } from 'containers/Space/BookingSpace/components/BookingComfirm';
 import { BookingHistory } from 'containers/Space/BookingHistory';
+import { AddSpace } from 'containers/Space/AddSpace';
 
 export const PUBLIC_ROUTES: TPublicRoutes = [
   {
@@ -49,6 +50,11 @@ export const PUBLIC_ROUTES: TPublicRoutes = [
   {
     path: '/profile',
     element: <ProfilePage />,
+    exact: true,
+  },
+  {
+    path: '/add-space',
+    element: <AddSpace />,
     exact: true,
   },
 ];

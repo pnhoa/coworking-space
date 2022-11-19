@@ -366,5 +366,27 @@ export default styled.div`
     color: rgb(8, 150, 107);
     border-color: rgb(8, 150, 107);
   }
+
+  .ant-form-item-label {
+    padding: 0 0 3px;
+    width: 155px;
+    text-align: left;
+    & > label {
+      font-size: 16px;
+      color: ${({ theme }) => theme.text.formLabel};
+    }
+  }
+  input {
+    border: solid 1px #ccc;
+    width: 100%;
+    min-height: 40px;
+    border-radius: 5px;
+    padding-left: 8px;
+  }
+  input:focus {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    border-color: #03a9f4;
+    outline: none;
+  }
   
 `;

@@ -388,5 +388,8 @@ export default styled.div`
     border-color: #03a9f4;
     outline: none;
   }
+  .ant-select.ant-select-in-form-item {
+     width: 75%; 
+  }
   
 `;

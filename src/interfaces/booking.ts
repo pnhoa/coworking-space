@@ -64,3 +64,37 @@ export enum Status {
       backgroundColor: '#e0e0ff',
     },
   ];
+
+  export const PAID_SPACE_CONST = [
+    {
+      value: false,
+      text: 'No',
+      color: 'red',
+      colorText: '#F75D81',
+      backgroundColor: '#ffefff',
+    },
+    {
+      value: true,
+      text: 'Yes',
+      color: 'green',
+      colorText: '#52c41a',
+      backgroundColor: '#f6ffed',
+    },
+  ]
+  
+  export const APPROVED_CONST = [
+    {
+      value: false,
+      text: 'Not approved',
+      color: 'red',
+      colorText: '#F75D81',
+      backgroundColor: '#ffefff',
+    },
+    {
+      value: true,
+      text: 'Approved',
+      color: 'green',
+      colorText: '#52c41a',
+      backgroundColor: '#f6ffed',
+    },
+  ]

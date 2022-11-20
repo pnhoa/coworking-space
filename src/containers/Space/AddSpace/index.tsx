@@ -7,6 +7,7 @@ import { AddressStep } from './components/AddressStep';
 import { AmentityStep } from './components/AmentityStep';
 import { ContactStep } from './components/ContactStep';
 import { DescriptionStep } from './components/DescriptionStep';
+import { ImageStep } from './components/ImageStep';
 import { OperationHourStep } from './components/OperationHourStep';
 import { OverviewStep } from './components/OverviewStep';
 import SpaceWrapper from './style';
@@ -35,6 +36,7 @@ export const AddSpace = () => {
   const [address, setAddress] = useState(null);
   const [amentity, setAmentity] = useState(null);
   const [operationHour, setOperationHour] = useState(null);
+  const [images, setImages] = useState(null);
 
   const isStepDisabled = (stepNumber: any) => {
     switch(stepNumber) {
@@ -56,6 +58,9 @@ export const AddSpace = () => {
 
       case 6:
           return overview === null || description === null || contact === null || address === null || amentity === null || operationHour === null; 
+      case 7:
+          return overview === null || description === null || contact === null || address === null || amentity === null || operationHour === null
+          || images === null; 
 
       default:
         return false;
@@ -89,6 +94,11 @@ export const AddSpace = () => {
     setOperationHour(values)
     setCurrent(6)
   }
+  const onSuccessImageFrom = (values: any) => {
+    console.log(values)
+    setImages(values)
+    setCurrent(7)
+  }
   const forms = [
     <OverviewStep data={overview} onSuccess={onSuccessOverviewFrom}  />,
     <DescriptionStep data={description} onSuccess={onSuccessDescriptionFrom}/>,
@@ -96,6 +106,7 @@ export const AddSpace = () => {
     <AddressStep data={address} onSuccess={onSuccessAddressFrom}/>,
     <AmentityStep data={amentity} onSuccess={onSuccessAmentityFrom}/>,
     <OperationHourStep data={operationHour} onSuccess={onSuccessOperationHourFrom}/>,
+    <ImageStep data={images} onSuccess={onSuccessImageFrom}/>,
   ]
 
 
@@ -123,8 +134,9 @@ export const AddSpace = () => {
                   <Steps.Step disabled={isStepDisabled(2)} title="Contact"></Steps.Step>
                   <Steps.Step disabled={isStepDisabled(3)} title="Address"></Steps.Step>
                   <Steps.Step disabled={isStepDisabled(4)} title="Amentity"></Steps.Step>
-                  <Steps.Step  title="Operation Hours"></Steps.Step>
-                  <Steps.Step disabled={isStepDisabled(6)} title="Photos"></Steps.Step>
+                  <Steps.Step disabled={isStepDisabled(5)}  title="Operation Hours"></Steps.Step>
+                  <Steps.Step  title="Photos"></Steps.Step>
+                  <Steps.Step disabled={isStepDisabled(7)} title="Service"></Steps.Step>
                 </Steps>
               </Col>
               <Col span={20}>

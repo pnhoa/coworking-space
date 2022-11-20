@@ -15,6 +15,20 @@ const spaceApi = {
     };
   },
 
+  async getAallByCustomerId(customerId: number, params: ListParams): Promise<ListResponse<Space>> {
+    const data: ApiResponse<Space> = await axiosClient.get(`/spaces/customers/${customerId}`, {
+      params,
+    });
+    return {
+      data: data.content,
+      pagination: {
+        page: data.number,
+        limit: data.size,
+        total: data.totalElements,
+      },
+    };
+  },
+
   getById(id: number): Promise<SpaceDetail> {
     const url = `/spaces/${id}`;
     return axiosClient.get(url);

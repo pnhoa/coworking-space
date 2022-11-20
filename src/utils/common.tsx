@@ -1,5 +1,5 @@
 import { Tag } from 'antd';
-import { BOOKING_STATUS, MatchSubSpace, Status, SubSpace } from 'interfaces';
+import { APPROVED_CONST, BOOKING_STATUS, Category, HourInDay, MatchSubSpace, PAID_SPACE_CONST, Status, SubSpace } from 'interfaces';
 import moment from 'moment';
 
 export const formatPrice = (price: number) => {
@@ -60,3 +60,67 @@ export const formatBookingStatus = (data: string) => {
   const restItem = BOOKING_STATUS.find((item) => String(Status[item.value]) === data);
   return <Tag color={restItem?.colorText}>{restItem?.text ? restItem.text : data}</Tag>;
 };
+
+export const getHourInDay = () => {
+  const hourInDay = new Array<HourInDay>();
+  hourInDay.push({key: "0000", value: "12:00 AM"})
+  hourInDay.push({key: "0100", value: "01:00 AM"})
+  hourInDay.push({key: "0200", value: "02:00 AM"})
+  hourInDay.push({key: "0300", value: "03:00 AM"})
+  hourInDay.push({key: "0400", value: "04:00 AM"})
+  hourInDay.push({key: "0500", value: "05:00 AM"})
+  hourInDay.push({key: "0600", value: "06:00 AM"})
+  hourInDay.push({key: "0700", value: "07:00 AM"})
+  hourInDay.push({key: "0800", value: "08:00 AM"})
+  hourInDay.push({key: "0900", value: "09:00 AM"})
+  hourInDay.push({key: "1000", value: "10:00 AM"})
+  hourInDay.push({key: "1100", value: "11:00 AM"})
+  hourInDay.push({key: "1200", value: "12:00 PM"})
+  hourInDay.push({key: "1300", value: "01:00 PM"})
+  hourInDay.push({key: "1400", value: "02:00 PM"})
+  hourInDay.push({key: "1500", value: "03:00 PM"})
+  hourInDay.push({key: "1600", value: "04:00 PM"})
+  hourInDay.push({key: "1700", value: "05:00 PM"})
+  hourInDay.push({key: "1800", value: "06:00 PM"})
+  hourInDay.push({key: "1900", value: "07:00 PM"})
+  hourInDay.push({key: "2000", value: "08:00 PM"})
+  hourInDay.push({key: "2100", value: "09:00 PM"})
+  hourInDay.push({key: "2200", value: "10:00 PM"})
+  hourInDay.push({key: "2300", value: "11:00 PM"})
+
+  return hourInDay;
+}
+
+export const getDayInWeek = () => {
+  const dayInWeek = new Array<HourInDay>();
+  dayInWeek.push({key: "Mon", value: "Monday"})
+  dayInWeek.push({key: "Tue", value: "Tuesday"})
+  dayInWeek.push({key: "Wed", value: "Wednesday"})
+  dayInWeek.push({key: "Thu", value: "Thurday"})
+  dayInWeek.push({key: "Fri", value: "Friday"})
+  dayInWeek.push({key: "Sat", value: "Saturday"})
+  dayInWeek.push({key: "Sun", value: "Sunday"})
+
+  return dayInWeek;
+}
+
+export const formatCategoryById = (categoryId: number, categoryList?: Category[]) => {
+  return categoryList?.find((category) => category.id === categoryId)?.name
+}
+
+export const formatSpacePaid = (paid: boolean) => {
+  const status = PAID_SPACE_CONST.find((item) => item.value === paid)
+  return <Tag color={status?.color}>{status?.text}</Tag>
+}
+
+export const formatSpaceApproved = (approved: boolean) => {
+  const status = APPROVED_CONST.find((item) => item.value === approved)
+  return <Tag color={status?.color}>{status?.text}</Tag>
+}
+
+
+export const formatExpiredDate = (text?: string) => {
+  if (!text) return null
+  const dateTime = moment(text)
+  return  dateTime.format(`MMM D YYYY`)
+}

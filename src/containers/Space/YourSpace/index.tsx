@@ -1,22 +1,23 @@
-import { Image, Pagination } from 'antd';
+import { Image} from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import TableCustom from 'components/TableCustom';
-import queryString from 'query-string';
 import { Category, PaginationParams, Space} from 'interfaces';
 import React, { useState, useEffect } from 'react';
-import { formatCategoryById, formatExpiredDate, formatPrice, formatSpacePaid } from 'utils/common';
+import { formatCategoryById, formatExpiredDate, formatPrice, formatSpaceApproved, formatSpacePaid } from 'utils/common';
 import { SubSpaceWrapper } from './styles';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import spaceApi from 'api/spaceApi';
 import categoryApi from 'api/categoryApi';
 import { Loading } from 'components/Loading';
 import NavBar from 'components/Header';
 import { Footer } from 'components/Footer';
+import ViewButton from 'components/ViewButton';
+import PaymentButton from 'components/PaymentButton';
+import GroupActions from 'components/GroupActions';
 
 export const YourSpaceList: React.FC = () => {
 
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [spaceList, setSpaceList] = useState<Space[]>()
   const [categoryList, setCategoryList] = useState<Category[]>()
@@ -64,20 +65,6 @@ export const YourSpaceList: React.FC = () => {
     })()
   }, [])
 
-  const handlePageChange = (page: number) => {
-    const queryParams = queryString.parse(location.search);
-    const filter = {
-      ...queryParams,
-      page: page - 1,
-    };
-    setPagination({ ...pagination, page: page - 1 });
-    navigate(`${location.pathname}?${queryString.stringify(filter)}`);
-  };
-  const handleOnRefresh = () => {
-    setRefresh(true);
-  };
-
-
   const columns = [
     {
       title: 'Image',
@@ -102,7 +89,7 @@ export const YourSpaceList: React.FC = () => {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      width: 500,
+      width: 300,
     },
     {
       title: 'Category',
@@ -135,8 +122,13 @@ export const YourSpaceList: React.FC = () => {
     {
       title: 'Approved',
       dataIndex: 'approved',
-      width: 140,
-      key: 'approved',
+      width: 120,
+      filters: [
+        { text: 'Yes', value: true },
+        { text: 'No', value: false },
+      ],
+      onFilter: (value, record) => record.paid === value,
+      render: (data) => formatSpaceApproved(data),
     },
     {
       title: 'Paid',
@@ -170,6 +162,19 @@ export const YourSpaceList: React.FC = () => {
       onFilter: (value, record) => record.expired === value,
       render: (data) => formatSpacePaid(data),
     },
+    {
+      title: 'Action',
+      fixed: 'right',
+      width: 90,
+      dataIndex: 'id',
+      key: 'id',
+      render: (data) => (
+        <GroupActions>
+          <PaymentButton id={data}></PaymentButton>
+          <ViewButton id={data} />
+        </GroupActions>
+      ),
+    },
 
   ] as ColumnsType<Space>
 
@@ -181,14 +186,8 @@ export const YourSpaceList: React.FC = () => {
         <>
             <NavBar />
             <div className='container'>
+              <h1 className='title'>YOUR SPACE</h1>
               <TableCustom columns={columns} data={spaceList} />
-              <div className='product__pagination'>
-                <Pagination
-                  total={pagination.total}
-                  defaultPageSize={20}
-                  style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}
-                  onChange={handlePageChange} />
-              </div>
             </div>
             
             <Footer />

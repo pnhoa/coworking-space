@@ -10,6 +10,8 @@ import { BookingConfirm } from 'containers/Space/BookingSpace/components/Booking
 import { BookingHistory } from 'containers/Space/BookingHistory';
 import { AddSpace } from 'containers/Space/AddSpace';
 import { YourSpaceList } from 'containers/Space/YourSpace';
+import { YourSpaceDetail } from 'containers/Space/YourSpaceDetail';
+import { PaymentSpace } from 'containers/Space/PaymentSpace';
 
 export const PUBLIC_ROUTES: TPublicRoutes = [
   {
@@ -61,6 +63,16 @@ export const PUBLIC_ROUTES: TPublicRoutes = [
   {
     path: '/your-space',
     element: <YourSpaceList />,
+    exact: true,
+  },
+  {
+    path: '/your-space/:id/show',
+    element: <YourSpaceDetail />,
+    exact: true,
+  },
+  {
+    path: '/your-space/:id/payment',
+    element: <PaymentSpace />,
     exact: true,
   },
 ];

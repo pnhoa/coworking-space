@@ -5,3 +5,5 @@ export * from './comment';
 export * from './space';
 export * from './category';
 export * from './booking';
+export * from './restLayout';
+export * from './restTitle';

@@ -40,6 +40,10 @@ const spaceApi = {
     return data
   },
 
+  paymentSpace(spaceId: number, servicePackId: number) {
+    return axiosClient.put(`/spaces/${spaceId}/${servicePackId}`);
+  },
+
   
 };
 export default spaceApi;

@@ -7,3 +7,4 @@ export * from './category';
 export * from './booking';
 export * from './restLayout';
 export * from './restTitle';
+export * from './servicePack';

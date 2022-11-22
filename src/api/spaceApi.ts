@@ -15,7 +15,7 @@ const spaceApi = {
     };
   },
 
-  async getAallByCustomerId(customerId: number, params: ListParams): Promise<ListResponse<Space>> {
+  async getAllByCustomerId(customerId: number, params: ListParams): Promise<ListResponse<Space>> {
     const data: ApiResponse<Space> = await axiosClient.get(`/spaces/customers/${customerId}`, {
       params,
     });

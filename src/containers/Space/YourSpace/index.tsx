@@ -1,11 +1,11 @@
-import { Image} from 'antd';
+import { Image, notification} from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import TableCustom from 'components/TableCustom';
 import { Category, PaginationParams, Space} from 'interfaces';
 import React, { useState, useEffect } from 'react';
 import { formatCategoryById, formatExpiredDate, formatPrice, formatSpaceApproved, formatSpacePaid } from 'utils/common';
 import { SubSpaceWrapper } from './styles';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import spaceApi from 'api/spaceApi';
 import categoryApi from 'api/categoryApi';
 import { Loading } from 'components/Loading';
@@ -18,6 +18,7 @@ import GroupActions from 'components/GroupActions';
 export const YourSpaceList: React.FC = () => {
 
   const location = useLocation();
+  const navigate = useNavigate()
 
   const [spaceList, setSpaceList] = useState<Space[]>()
   const [categoryList, setCategoryList] = useState<Category[]>()
@@ -33,19 +34,25 @@ export const YourSpaceList: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      setLoading(true)
-      try {
-        const data = await spaceApi.getAallByCustomerId(customerId, pagination);
-        setSpaceList(data.data)
-        setPagination(data.pagination);
-        setLoading(false);
-        setRefresh(false);
+      if(customerId === 0){
+        setTimeout(() => {
+          notification.error({ message:"Please login!!"})
+          navigate('/login') }, 500);
         
-      } catch (error) {
-        console.log('Failed to fetch space list: ', error)
-      }
+      } else {
+        try {
+          const data = await spaceApi.getAllByCustomerId(customerId, pagination);
+          setSpaceList(data.data)
+          setPagination(data.pagination);
+          setLoading(false);
+          setRefresh(false);
+          
+        } catch (error) {
+          console.log('Failed to fetch space list: ', error)
+        }
 
-      setLoading(false)
+        setLoading(false)
+    }
     })()
   }, [location.search, refresh])
 

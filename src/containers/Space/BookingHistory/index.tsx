@@ -6,7 +6,7 @@ import queryString from 'query-string';
 import { BookingHistoryStyles } from "./styles";
 import { Loading } from "components/Loading";
 import NavBar from "components/Header";
-import { Pagination } from "antd";
+import { notification, Pagination } from "antd";
 import { Footer } from "components/Footer";
 import { BookingHistoryDetail } from "./components/BookingHistoryDetail";
 
@@ -26,11 +26,18 @@ export const BookingHistory = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await bookingApi.getApi(customerId, pagination);
-      setBookings(data.data);
-      setPagination(data.pagination);
-      setLoading(false);
-      setRefresh(false);
+      if(customerId === 0){
+        setTimeout(() => {
+          notification.error({ message:"Please login!!"})
+          navigate('/login') }, 500);
+        
+      } else {
+        const data = await bookingApi.getApi(customerId, pagination);
+        setBookings(data.data);
+        setPagination(data.pagination);
+        setLoading(false);
+        setRefresh(false);
+      }
     })();
   }, [location.search, refresh]);
 

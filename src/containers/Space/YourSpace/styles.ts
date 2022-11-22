@@ -35,7 +35,7 @@ width: 100%;
   }
 }
 .footer {
-  background-color: rgb(248, 248, 248);
+  
   padding-top: 20px;
 }
 

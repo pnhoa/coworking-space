@@ -50,7 +50,6 @@ export const PayPalPayment: React.FC<Props> = ({ spaceId, servicePackId }) => {
   const onApprove = (data: any, actions: any) => {
     return actions.order.capture().then(async function (details: any) {
       await spaceApi.paymentSpace(spaceId, servicePackId);
-      alert(`Transaction completed`);
       notification['success']({
         message: 'Payment space successfully!',
         placement: 'topRight',

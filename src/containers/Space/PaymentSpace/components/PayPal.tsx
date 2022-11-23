@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import spaceApi from 'api/spaceApi';
 import { ServicePack } from 'interfaces'
 import servicePackApi from 'api/servicePackApi';
+import { Loading } from 'components/Loading';
 interface Props {
   spaceId: number;
   servicePackId: number;
@@ -14,11 +15,13 @@ export const PayPalPayment: React.FC<Props> = ({ spaceId, servicePackId }) => {
   const clientId = process.env.REACT_APP_PAYPAL_CLIENT_ID;
   const [orderID, setOrderID] = useState(false);
   const [servicePack, setServicePack] = useState({} as ServicePack);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
           const data = await servicePackApi.getById(servicePackId)
           setServicePack(data)
+          setLoading(false)
           
     })()
   }, [servicePackId])
@@ -47,6 +50,7 @@ export const PayPalPayment: React.FC<Props> = ({ spaceId, servicePackId }) => {
   const onApprove = (data: any, actions: any) => {
     return actions.order.capture().then(async function (details: any) {
       await spaceApi.paymentSpace(spaceId, servicePackId);
+      alert(`Transaction completed`);
       notification['success']({
         message: 'Payment space successfully!',
         placement: 'topRight',
@@ -56,7 +60,10 @@ export const PayPalPayment: React.FC<Props> = ({ spaceId, servicePackId }) => {
   };
 
 
-  return (
+  return (<>
+    {loading ? (
+      <Loading />
+    ) : (
     <PayPalScriptProvider options={{ 'client-id': `${clientId}` }}>
       <PayPalButtons
         style={{ layout: 'horizontal' }}
@@ -64,5 +71,7 @@ export const PayPalPayment: React.FC<Props> = ({ spaceId, servicePackId }) => {
         onApprove={onApprove}
       />
     </PayPalScriptProvider>
-  );
+  )}
+  </>
+);
 };

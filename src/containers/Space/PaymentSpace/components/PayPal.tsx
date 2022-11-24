@@ -1,11 +1,8 @@
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import spaceApi from 'api/spaceApi';
-import { ServicePack } from 'interfaces'
-import servicePackApi from 'api/servicePackApi';
-import { Loading } from 'components/Loading';
 interface Props {
   spaceId: number;
   servicePackId: number;
@@ -13,19 +10,6 @@ interface Props {
 export const PayPalPayment: React.FC<Props> = ({ spaceId, servicePackId }) => {
   const navigate = useNavigate();
   const clientId = process.env.REACT_APP_PAYPAL_CLIENT_ID;
-  const [orderID, setOrderID] = useState(false);
-  const [servicePack, setServicePack] = useState({} as ServicePack);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-          const data = await servicePackApi.getById(servicePackId)
-          setServicePack(data)
-          setLoading(false)
-          
-    })()
-  }, [servicePackId])
-
 
   const createOrder = (data: any, actions: any) => {
     return actions.order
@@ -35,13 +19,12 @@ export const PayPalPayment: React.FC<Props> = ({ spaceId, servicePackId }) => {
             description: 'Order',
             amount: {
               currency_code: 'USD',
-              value: servicePack.price,
+              value: Number(localStorage.getItem("price")),
             },
           },
         ],
       })
       .then((orderID: any) => {
-        setOrderID(orderID);
         return orderID;
       });
   };
@@ -59,18 +42,14 @@ export const PayPalPayment: React.FC<Props> = ({ spaceId, servicePackId }) => {
   };
 
 
-  return (<>
-    {loading ? (
-      <Loading />
-    ) : (
+  return (
     <PayPalScriptProvider options={{ 'client-id': `${clientId}` }}>
       <PayPalButtons
         style={{ layout: 'horizontal' }}
         createOrder={createOrder}
         onApprove={onApprove}
+        
       />
     </PayPalScriptProvider>
-  )}
-  </>
-);
+  );
 };

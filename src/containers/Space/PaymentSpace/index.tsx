@@ -59,19 +59,22 @@ export const PaymentSpace = () => {
             <NavBar />
             <div className='container'>
               <div className='container__navbar'>
-                <h2>Choose a Plan for your Coworking Space:</h2>
+                
               </div>
               <div className='content'>
                 <div className='payment-method'>
-
+                <h2 style={{marginBottom: 20}}>Choose a Plan for your Coworking Space:</h2>
                         <Row gutter={24}>
                             {servicePackList ? servicePackList.map((item) => (
-                                <Col span={7} key={item.id}>
-                                    <Card style={{width: 500}} title={item.name} bordered={false}>
-                                         {item.price}$ {"/" + item.name}
-                                         
+                                <Col span={8} key={item.id}>
+                                  <div className='home__productitems' onClick={()=> handleClick(item)}>
+                                    <Card style={{textAlign: 'center'}} title={item.name} bordered={false}>
+                                          {item.price}$
+                                          
                                     </Card>
-                                    <Button onClick={()=> handleClick(item)}>SELECT</Button>
+                                    
+                                  </div>
+                                   
                                 </Col>
                             )) : <></>}
                         </Row>

@@ -12,7 +12,7 @@ export const SpaceRelatedWrapper = styled.div`
   }
   .btn_cart {
     margin-top: 0 !important;
-    background-color: #00c78a;
+    background-color: #08966B;
     color: #fff;
   }
 `;

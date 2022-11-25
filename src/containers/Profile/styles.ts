@@ -21,4 +21,12 @@ export const ProfileStyles = styled.div`
     background-color: rgb(248, 248, 248);
     padding-top: 20px;
   }
+  .ant-btn-background-ghost.ant-btn-primary {
+    background-color: #08966b;
+    color: #FFFFFF;
+  }
+  .ant-btn-background-ghost.ant-btn-primary:hover {
+    color: #08966b;
+    background-color: #FFFFFF;
+  }
 `;

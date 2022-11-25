@@ -1,4 +1,4 @@
-import { Image, notification} from 'antd';
+import { Button, Image, notification} from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import TableCustom from 'components/TableCustom';
 import { Category, PaginationParams, Space} from 'interfaces';
@@ -185,6 +185,10 @@ export const YourSpaceList: React.FC = () => {
 
   ] as ColumnsType<Space>
 
+  const onClickBookingManagement = () => {
+    navigate("/booking/management")
+  }
+
   return (
     <SubSpaceWrapper>
       {loading ? (
@@ -194,6 +198,7 @@ export const YourSpaceList: React.FC = () => {
             <NavBar />
             <div className='container'>
               <h1 className='title'>YOUR SPACE</h1>
+              <Button onClick={onClickBookingManagement}>Booking Management</Button>
               <TableCustom columns={columns} data={spaceList} />
             </div>
             

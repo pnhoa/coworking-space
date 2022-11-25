@@ -12,6 +12,7 @@ import { AddSpace } from 'containers/Space/AddSpace';
 import { YourSpaceList } from 'containers/Space/YourSpace';
 import { YourSpaceDetail } from 'containers/Space/YourSpaceDetail';
 import { PaymentSpace } from 'containers/Space/PaymentSpace';
+import { BookingManagement } from 'containers/Space/BookingManagement';
 
 export const PUBLIC_ROUTES: TPublicRoutes = [
   {
@@ -43,6 +44,11 @@ export const PUBLIC_ROUTES: TPublicRoutes = [
   {
     path: '/booking/history',
     element: <BookingHistory />,
+    exact: true,
+  },
+  {
+    path: '/booking/management',
+    element: <BookingManagement />,
     exact: true,
   },
   {

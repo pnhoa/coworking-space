@@ -2,8 +2,8 @@ import { ApiResponse, Booking, CancelPayload, ListParams, ListResponse } from 'i
 import axiosClient from './axiosClient';
 
 const bookingApi = {
-  async getAll(params: ListParams): Promise<ListResponse<Booking>> {
-    const data: ApiResponse<Booking> = await axiosClient.get('/bookings', { params })
+  async getAll(userId: number, params: ListParams): Promise<ListResponse<Booking>> {
+    const data: ApiResponse<Booking> = await axiosClient.get(`/bookings/management/${userId}`, { params })
 
     return {
       data: data.content,

@@ -1,5 +1,4 @@
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Col, Divider, Form, Image, Input, Row, Space } from "antd";
+import { Button, Col, Divider, Form, Image, Row } from "antd";
 import FormUploadImage from "components/FormUploadImage";
 import { FormContextCustom } from "context/FormContextCustom";
 import { FC, useState } from "react";
@@ -10,24 +9,7 @@ interface Props {
     onSuccess: (data: any) => void;
   }
 
-const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 4 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 20 },
-    },
-  };
-const formItemLayoutWithOutLabel = {
-    wrapperCol: {
-      xs: { span: 24, offset: 0 },
-      sm: { span: 20, offset: 4 },
-    },
-  };
-
-
+//https://stackoverflow.com/questions/66670744/how-to-get-the-value-of-upload-from-form-item-in-antd
 export const ImageStep: FC<Props> = ({data, onSuccess }) => {
 
     const [openUpload, setOpenUpload] = useState(false);
@@ -44,14 +26,17 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
                 <Row gutter={24}>
 
                     <Col span={24}>
-                        {console.log(data)}
-                        {console.log(openUpload)}
                         { data ? 
                         <Col span={24}>
                             {
                                 openUpload === true ? <></> :
                                 <Col span={24}> 
-                                    <Form.Item label='Large Image' initialValue={data.largeImage}>
+                                    <Form.Item label='Large Image' initialValue={data.largeImage}
+                                    rules={[
+                                        {
+                                        required: true
+                                        },
+                                    ]}>
 
                                     </Form.Item>
                                     <Col span={24}>
@@ -77,7 +62,13 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
                                
                             {openUpload === true ? 
                             <Col span={24}>
-                                <Form.Item label='Large Image'>
+                                <Form.Item label='Large Image'
+                                    rules={[
+                                        {
+                                        required: true
+                                        },
+                                    ]}
+                                >
                                     <FormUploadImage name='largeImage' />
                                 </Form.Item>
                             </Col> : <></>
@@ -85,61 +76,18 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
                         </ Col>
                         
                         :
-                        <Form.Item label='Large Image'>
+                        <Form.Item label='Large Image'
+                        rules={[
+                            {
+                            required: true
+                            },
+                        ]}
+                        >
                             <FormUploadImage name='largeImage' />
                         </Form.Item>
                     }
                         
                     </Col>
-                    <Col span={24}>
-                        <h2>ADDITIONAL IMAGES</h2>
-                    </Col> 
-
-                    <Col span={24}>
-                    <Form.List
-                            name="images"   
-                        >
-                            {(fields, { add, remove }, { errors }) => (
-                            <>
-                                {fields.map((field, index) => (
-                                <Form.Item
-                                    {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-                                    label={index === 0 ? 'Images' : ''}
-                                    required={false}
-                                    key={field.key}
-                                >
-                                    <Form.Item
-                                    {...field}
-                                    validateTrigger={['onChange', 'onBlur']}
-                                    noStyle
-                                    >
-                                        <FormUploadImage name={'image_' + index} />
-                                        <Input hidden value={"123"}></Input>
-                                    </Form.Item>
-                                    {fields.length > 0 ? (
-                                    <MinusCircleOutlined
-                                        className="dynamic-delete-button"
-                                        onClick={() => remove(field.name)}
-                                    />
-                                    ) : null}
-                                </Form.Item>
-                                ))}
-                                <Form.Item>
-                                <Button
-                                    type="dashed"
-                                    onClick={() => add()}
-                                    style={{ width: '60%' }}
-                                    icon={<PlusOutlined />}
-                                >
-                                    Add image
-                                </Button>
-                                <Form.ErrorList errors={errors} />
-                                </Form.Item>
-                            </>
-                            )}
-                        </Form.List>
-                    </Col>
-
                     <Col span={24}>
                         <Form.Item>
                             <Button type='primary' htmlType='submit' style={{ width: '10%', backgroundColor:'#08966b' }}>

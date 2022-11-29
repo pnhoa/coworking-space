@@ -21,6 +21,20 @@ width: 100%;
   /* padding: 78px 0px 60px; */
   /* border-bottom: 4px solid var(--primary-color); */
 }
+.btn-management {
+  margin-left:-215px;
+  font-size: 18px;
+  margin-bottom:3px;
+  border: 4px solid var(--primary-color);
+}
+.btn-management:hover {
+  margin-left:-215px;
+  font-size: 18px;
+  margin-bottom:3px;
+  border: 4px solid var(--primary-color);
+  color: #08966b;
+  background-color: #FFFFFF;
+}
 
 .content {
   padding: 150px 0 30px;

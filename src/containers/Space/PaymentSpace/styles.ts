@@ -562,6 +562,7 @@ width: 100%;
   background: transparent;
   border-bottom: 1px solid #f0f0f0;
   border-radius: 2px 2px 0 0;
+  padding: 0 0px;
 }
 .ant-card-body {
   padding: 40px;

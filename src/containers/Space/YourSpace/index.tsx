@@ -198,7 +198,7 @@ export const YourSpaceList: React.FC = () => {
             <NavBar />
             <div className='container'>
               <h1 className='title'>YOUR SPACE</h1>
-              <Button onClick={onClickBookingManagement}>Booking Management</Button>
+              {Number(spaceList?.length) > 0 ?<Button className='btn-management' style={{left: '100%'}} onClick={onClickBookingManagement}>Booking Management</Button>  : <></>}
               <TableCustom columns={columns} data={spaceList} />
             </div>
             

@@ -104,6 +104,46 @@ export const getDayInWeek = () => {
   return dayInWeek;
 }
 
+export const operationHourFunc = (operationHour: any) => {
+  const operationHourConvert = []
+    operationHourConvert.push({
+        "day": "Mon",
+        "openTime": operationHour.MonStart,
+        "closeTime": operationHour.MonEnd
+    })
+    operationHourConvert.push({
+        "day": "Tue",
+        "openTime": operationHour.TueStart,
+        "closeTime": operationHour.TueEnd
+    })
+    operationHourConvert.push({
+        "day": "Wed",
+        "openTime": operationHour.WedStart,
+        "closeTime": operationHour.WedEnd
+    })
+    operationHourConvert.push({
+        "day": "Thu",
+        "openTime": operationHour.ThuStart,
+        "closeTime": operationHour.ThuEnd
+    })
+    operationHourConvert.push({
+        "day": "Fri",
+        "openTime": operationHour.FriStart,
+        "closeTime": operationHour.FriEnd
+    })
+    operationHourConvert.push({
+        "day": "Sat",
+        "openTime": operationHour.SatStart,
+        "closeTime": operationHour.SatEnd
+    })
+    operationHourConvert.push({
+        "day": "Sun",
+        "openTime": operationHour.SunStart,
+        "closeTime": operationHour.SunEnd
+    })
+    return operationHourConvert;
+}
+
 export const formatCategoryById = (categoryId: number, categoryList?: Category[]) => {
   return categoryList?.find((category) => category.id === categoryId)?.name
 }

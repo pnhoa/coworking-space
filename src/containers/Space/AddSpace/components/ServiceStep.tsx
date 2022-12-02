@@ -1,6 +1,7 @@
-import { MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
-import { Button, Col, Divider, Form, Input, notification, Row } from "antd";
-import { FC, useEffect, useState } from "react";
+import { AimOutlined, CaretRightOutlined, MinusCircleOutlined, PlusOutlined, UploadOutlined} from "@ant-design/icons";
+import { Button, Col, Divider, Form, Input, notification, Row, Select, Upload } from "antd";
+import { FC } from "react";
+import ServiceWrapper from './style';
 
 
 interface Props {
@@ -8,46 +9,22 @@ interface Props {
     onSuccess: (data: any) => void;
   }
 
+  const { Option } = Select
 
 export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
 
-
-    const [form] = Form.useForm();
-    // const [fileList, setFileList] = useState<string[]>([]);
-
-    // useEffect(() => {
-    //     form.setFields([
-    //       {
-    //         name: "images",
-    //         value: fileList,
-    //       },
-    //     ]);
-    //   }, [fileList]); 
-
-    const handleFileInputChange = (e: any) => {
-        const url = window.URL.createObjectURL(e.target.files[0]);
-        // const prevFileList = fileList;
-        // prevFileList.push(url)
-        // setFileList(prevFileList)
-        // console.log(prevFileList)
-        return url;
-      };
-
       const handleChange = (e: any) => {
-        const url = (e.target.files[0]);
-        console.log(url)
-        return url;
+        return e.file.response;
       };
-
 
     return (
-        <div>
+        <ServiceWrapper>
             <h2>Tell me about your service?</h2>
             <Divider />
-            <Form name='service-step' scrollToFirstError onFinish={onSuccess} initialValues={data} form={form}>
+            <Form name='service-step' scrollToFirstError onFinish={onSuccess} initialValues={data} >
             
   
-                <Form.List name="services"
+                <Form.List name="serviceSpaceDTOs"
                     rules={[
                         {
                           validator: async (_, services) => {
@@ -63,9 +40,9 @@ export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
                         {fields.map(({ key, name, ...restField }) => (
                             <Row gutter={24} key={key}>
                                 <Col span={24}>
-                                    <h2>Service #{key + 1}</h2>
+                                    <h2 className="h2-service">Service #{key + 1}</h2>
                                 </Col> 
-                                <Col span={12}>
+                                <Col span={12} >
                                     <Form.Item
                                     {...restField}
                                     label="Title"
@@ -86,11 +63,12 @@ export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
                                 </Col>
 
                                 <Col span={24}>
-                                    <h2>Package</h2>
+                                    
+                                    <h3 className="h3-package">Package</h3>
                                 </Col> 
 
                                 
-                                <Form.List name={[name, 'packages']}
+                                <Form.List name={[name, 'packageDTOs']}
                                     rules={[
                                         {
                                         validator: async (_, packages) => {
@@ -106,16 +84,21 @@ export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
                                         {packages.map(({ key, name, ...restField }) => (
                                             <Row gutter={24} key={key}>
                                                 <Col span={24}>
-                                                    <h4>Package #{key + 1}</h4>
+                                                    <h4 className="h4-package"><CaretRightOutlined />Package #{key + 1}</h4>
                                                 </Col> 
-                                                <Col span={12}>
+                                                <Col span={10} className="h4-package">
                                                     <Form.Item
                                                     {...restField}
                                                     label="Type"
                                                     name={[name, 'type']}
                                                     rules={[{ required: true, message: 'Missing type' }]}
                                                     >
-                                                    <Input placeholder="Type" />
+                                                    <Select placeholder='select type'>
+                                                        <Option value="Hour">Hour</Option>
+                                                        <Option value="Day">Day</Option>
+                                                        <Option value="Month">Month</Option>
+                                                        <Option value="Year">Year</Option>
+                                                    </Select>
                                                     </Form.Item>
                                                 </Col>
                                                 <Col span={12}>
@@ -127,11 +110,11 @@ export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
                                                     <Input placeholder="Note" />
                                                     </Form.Item>
                                                 </Col>
-                                                <Col span={24}>
-                                                    <h2>Sub Space</h2>
+                                                <Col span={24} >
+                                                    <h2 className="h4-package">Sub Space</h2>
                                                 </Col> 
 
-                                                <Form.List name={[name, 'subSpaces']}
+                                                <Form.List name={[name, 'subSpaceDTOs']}
                                                     rules={[
                                                         {
                                                         validator: async (_, subSpaces) => {
@@ -147,10 +130,10 @@ export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
                                                     <>
                                                         {subSpaces.map(({ key, name, ...restField }) => (
                                                             <Row gutter={24} key={key}>
-                                                                <Col span={24}>
-                                                                    <h4>Sub Space #{key + 1}</h4>
+                                                                <Col span={24} className="subspace">
+                                                                    <h4> <AimOutlined /> Sub Space #{key + 1}</h4>
                                                                 </Col> 
-                                                                <Col span={24}>
+                                                                <Col span={22} className="subspace">
                                                                     <Form.Item
                                                                     {...restField}
                                                                     label="Title"
@@ -160,7 +143,7 @@ export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
                                                                     <Input placeholder="Title" />
                                                                     </Form.Item>
                                                                 </Col>
-                                                                <Col span={12}>
+                                                                <Col span={10} className="subspace">
                                                                     <Form.Item
                                                                     {...restField}
                                                                     label="Price"
@@ -182,48 +165,36 @@ export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
                                                                     </Form.Item>
                                                                 </Col>
 
-                                                                {/* <Col span={24}>
+                                                                <Col span={24} className="subspace">
                                                                     <Form.Item
                                                                     {...restField}
                                                                     label="Image"
                                                                     name={[name, 'imageUrl']}
+                                                                    getValueFromEvent={handleChange}
+                                                                    
                                                                     >
-                                                                    <Input type="file" onChange={handleFileInputChange}  />
-                                                                    </Form.Item>
-                                                                </Col> */}
-
-                                                                <Col span={24}>
-                                                                    <Form.Item
-                                                                    {...restField}
-                                                                    label="Image"
-                                                                    name={[name, 'imageUrl']}
-                                                                    rules={[
-                                                                        {
-                                                                        required: true
-                                                                        },
-                                                                    ]}
-                                                                    >
-                                                                         <Input className='mt-10 pointer' type='file' onChange={handleFileInputChange} />
-                                                                    {/* <Upload
-                                                                    onChange={handleChange}
+                                                                     <Upload
+                                                                     action={`${process.env.REACT_APP_URL}/spaces/upload`}
                                                                     multiple={false}
+                                                                    maxCount={1}
                                                                     defaultFileList={[]}>
                                                                         <Button icon={<UploadOutlined/>}>Click to Upload</Button>
-                                                                    </Upload> */}
+                                                                    </Upload>
                                                              
                                                                     </Form.Item>
                                                                 </Col>
                                                                 
                                                                 
                                                                 {subSpaces.length > 1 ?
-                                                                    <Col span={4}>
-                                                                        <MinusCircleOutlined onClick={() => remove(name)} />
+                                                                    <Col span={4} style={{left: '85%'}}>
+                                                                        <MinusCircleOutlined   onClick={() => remove(name)}> </MinusCircleOutlined>
+                                                                        <span style={{color: 'red'}} > Remove sub space #{key + 1}</span>
                                                                     </Col>
                                                                 : <></>}
 
                                                             </Row>
                                                         ))}
-                                                        <Col span={24}>
+                                                        <Col span={24} className="subspace">
                                                             <Form.Item>
                                                                 <Button type="dashed" style={{ width: '20%' }} onClick={() => add()} block icon={<PlusOutlined />}>
                                                                     Add new sub space
@@ -236,14 +207,15 @@ export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
                                                 </Form.List>
 
                                                 {packages.length > 1 ?
-                                                    <Col span={4}>
-                                                        <MinusCircleOutlined onClick={() => remove(name)} />
+                                                    <Col span={4} style={{left: '85%'}}>
+                                                        <MinusCircleOutlined style={{ fontSize: '20px'}} onClick={() => remove(name)} />
+                                                        <span style={{color: 'red', fontSize: '18px'}} > Remove package #{key + 1}</span>
                                                     </Col>
                                                 : <></>}
 
                                             </Row>
                                         ))}
-                                        <Col span={24}>
+                                        <Col span={24} className="h4-package">
                                             <Form.Item>
                                                 <Button type="dashed" style={{ width: '20%' }} onClick={() => add()} block icon={<PlusOutlined />}>
                                                     Add new package
@@ -255,8 +227,9 @@ export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
                                     )}
                                 </Form.List>
                                 {fields.length > 1 ?
-                                    <Col span={4}>
-                                        <MinusCircleOutlined onClick={() => remove(name)} />
+                                    <Col span={4} style={{left: '85%'}}>
+                                        <MinusCircleOutlined style={{ fontSize: '24px'}}  onClick={() => remove(name)} />
+                                        <span style={{color: 'red', fontSize: '20px'}} > Remove service #{key + 1}</span>
                                     </Col>
                                 : <></>}
                                 
@@ -284,7 +257,7 @@ export const ServiceStep: FC<Props> = ({data, onSuccess }) => {
                     </Col>  
                 </Row> 
             </Form>
-        </div>
+        </ServiceWrapper>
     );
 
 }

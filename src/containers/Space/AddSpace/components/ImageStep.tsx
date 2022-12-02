@@ -1,4 +1,5 @@
-import { Button, Col, Divider, Form, Image, Row } from "antd";
+import { Button, Col, Divider, Form, Image, Row, UploadFile, UploadProps } from "antd";
+import Upload, { RcFile } from "antd/lib/upload";
 import FormUploadImage from "components/FormUploadImage";
 import { FormContextCustom } from "context/FormContextCustom";
 import { FC, useState } from "react";
@@ -16,6 +17,35 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
 
     const [form] = Form.useForm();
 
+    const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const [fileUrls, setFileUrls] = useState<string[]>([]);
+    
+      const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+        setFileList(newFileList);
+      };
+
+      const handleChange = (e: any) => {
+        const newUrl = e.file.response
+        if(newUrl !== undefined) {
+            fileUrls.push(newUrl)
+            setFileUrls(fileUrls)
+            console.log(fileUrls)
+        }
+        
+        return fileUrls;
+      };
+    
+      const onPreview = async (file: UploadFile) => {
+        let src = file.url as string;
+        if (!src) {
+          src = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file.originFileObj as RcFile);
+            reader.onload = () => resolve(reader.result as string);
+          });
+        }
+      };
+
     return (
         <div>
             <h2>What does it look like?</h2>
@@ -24,14 +54,16 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
             <Form name='image-step' scrollToFirstError onFinish={onSuccess} initialValues={data} form={form} >
             <FormContextCustom.Provider value={{ form }}>
                 <Row gutter={24}>
-
+                    <Col span={24}>
+                        <h2>LARGE IMAGE</h2>
+                    </Col>
                     <Col span={24}>
                         { data ? 
                         <Col span={24}>
                             {
                                 openUpload === true ? <></> :
-                                <Col span={24}> 
-                                    <Form.Item label='Large Image' initialValue={data.largeImage}
+                                <Col span={24} style={{paddingBottom: '40px'}}> 
+                                    <Form.Item  initialValue={data.largeImage}
                                     rules={[
                                         {
                                         required: true
@@ -39,8 +71,8 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
                                     ]}>
 
                                     </Form.Item>
-                                    <Col span={24}>
-                                        <Button type='primary' onClick={() => (setOpenUpload(!openUpload))} style={{ width: '10%', backgroundColor: '#08966b' }}>
+                                    <Col span={24} >
+                                        <Button type='primary' onClick={() => (setOpenUpload(!openUpload))} style={{ width: '10%', backgroundColor: '#08966b', paddingLeft: '0px' }}>
                                             Change picture
                                         </Button>
                                     </Col>
@@ -50,7 +82,6 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
                                         style={{
                                             width: '1200px',
                                             height: '800px',
-                                            borderRadius: '10px',
                                             objectFit: 'cover',
                                             objectPosition: 'center',
                                              
@@ -62,7 +93,7 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
                                
                             {openUpload === true ? 
                             <Col span={24}>
-                                <Form.Item label='Large Image'
+                                <Form.Item 
                                     rules={[
                                         {
                                         required: true
@@ -76,7 +107,7 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
                         </ Col>
                         
                         :
-                        <Form.Item label='Large Image'
+                        <Form.Item 
                         rules={[
                             {
                             required: true
@@ -87,6 +118,26 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
                         </Form.Item>
                     }
                         
+                    </Col>
+                    <Col span={24}>
+                        <h2>ADDITIONAL IMAGES</h2>
+                    </Col>
+                    <Col span={24} style={{paddingBottom: '40px'}}>
+                        <Form.Item
+                            name="imageUrls"
+                            getValueFromEvent={handleChange}
+                        >
+                        <Upload
+                            action={`${process.env.REACT_APP_URL}/spaces/upload`}
+                            listType="picture-card"
+                            fileList={fileList}
+                            onChange={onChange}
+                            onPreview={onPreview}
+                        >
+                            {fileList.length < 5 && '+ Upload'}
+                        </Upload>
+                        </Form.Item>
+                    
                     </Col>
                     <Col span={24}>
                         <Form.Item>

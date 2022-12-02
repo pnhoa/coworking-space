@@ -16,7 +16,7 @@ export const AddressStep: FC<Props> = ({data, onSuccess }) => {
             <Divider />
             <Form name='overview-step' scrollToFirstError onFinish={onSuccess} initialValues={data} >
                 <Row gutter={24}>
-                    <Col span={12}>
+                    <Col span={24}>
                         <Form.Item
                             name='locationName'
                             label='Location Name'
@@ -103,6 +103,21 @@ export const AddressStep: FC<Props> = ({data, onSuccess }) => {
                             {
                             required: true,
                             message: 'Please input province!',
+                            whitespace: true,
+                            },
+                        ]}
+                        >
+                        <Input />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                    <Form.Item
+                        name='country'
+                        label='Country'
+                        rules={[
+                            {
+                            required: true,
+                            message: 'Please input country!',
                             whitespace: true,
                             },
                         ]}

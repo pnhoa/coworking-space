@@ -7,6 +7,7 @@ import { AddressStep } from './components/AddressStep';
 import { AmentityStep } from './components/AmentityStep';
 import { ContactStep } from './components/ContactStep';
 import { DescriptionStep } from './components/DescriptionStep';
+import { EndStep } from './components/EndStep';
 import { ImageStep } from './components/ImageStep';
 import { OperationHourStep } from './components/OperationHourStep';
 import { OverviewStep } from './components/OverviewStep';
@@ -31,8 +32,8 @@ export const AddSpace = () => {
 
 
   const [current, setCurrent] = useState(0);
-  const [description, setDescription] = useState(null);
   const [overview, setOverview] = useState(null);
+  const [description, setDescription] = useState(null);
   const [contact, setContact] = useState(null);
   const [address, setAddress] = useState(null);
   const [amentity, setAmentity] = useState(null);
@@ -101,13 +102,11 @@ export const AddSpace = () => {
     setCurrent(6)
   }
   const onSuccessImageFrom = (values: any) => {
-    console.log(values)
     setImages(values)
     setCurrent(7)
   }
 
   const onSuccessServiceFrom = (values: any) => {
-    console.log(values)
     setService(values)
     setCurrent(8)
   }
@@ -120,6 +119,8 @@ export const AddSpace = () => {
     <OperationHourStep data={operationHour} onSuccess={onSuccessOperationHourFrom}/>,
     <ImageStep data={images} onSuccess={onSuccessImageFrom}/>,
     <ServiceStep data={service} onSuccess={onSuccessServiceFrom}/>,
+    <EndStep overview={overview} description={description} contact={contact}
+     address={address} amentity={amentity} operationHour={operationHour} images={images} service={service}/>
   ]
 
 
@@ -148,8 +149,8 @@ export const AddSpace = () => {
                   <Steps.Step disabled={isStepDisabled(3)} title="Address"></Steps.Step>
                   <Steps.Step disabled={isStepDisabled(4)} title="Amentity"></Steps.Step>
                   <Steps.Step disabled={isStepDisabled(5)}  title="Operation Hours"></Steps.Step>
-                  <Steps.Step  title="Photos"></Steps.Step>
-                  <Steps.Step  title="Service"></Steps.Step>
+                  <Steps.Step disabled={isStepDisabled(6)}  title="Photos"></Steps.Step>
+                  <Steps.Step disabled={isStepDisabled(7)}  title="Service"></Steps.Step>
                   <Steps.Step disabled={isStepDisabled(8)} title="End"></Steps.Step>
                 </Steps>
               </Col>

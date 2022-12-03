@@ -37,7 +37,7 @@ export const SpaceDetail = () => {
     const data = await spaceApi.getById(spaceId);
     setSpace(data);
 
-    const recommendList = await spaceApi.getAll({ limit: 5, page: 0 });
+    const recommendList = await spaceApi.getAllNearBy(customerId, spaceId, { limit: 8, page: 0 });
     setSpaceRelatedList(recommendList.data);
 
     const images: string[] = [data.largeImage ? data.largeImage : 'no-data.jpeg']
@@ -49,7 +49,7 @@ export const SpaceDetail = () => {
   useEffect(() => {
     (async () => {
       if (id) {
-        await getData(Number(id), Number(customerId) || 1);
+        await getData(Number(id), Number(customerId) || 0);
         setStartLoading(false);
       }
     })();

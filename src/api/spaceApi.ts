@@ -16,6 +16,19 @@ const spaceApi = {
     };
   },
 
+  async getAllNearBy(userId: number, spaceId: number, params: ListParams): Promise<ListResponse<Space>> {
+    const data: ApiResponse<Space> = await axiosClient.get(`/spaces/nearby/${userId}/${spaceId}`, { params });
+
+    return {
+      data: data.content,
+      pagination: {
+        page: data.number,
+        limit: data.size,
+        total: data.totalElements,
+      },
+    };
+  },
+
   async getAllByCustomerId(customerId: number, params: ListParams): Promise<ListResponse<Space>> {
     const data: ApiResponse<Space> = await axiosClient.get(`/spaces/customers/${customerId}`, {
       params,

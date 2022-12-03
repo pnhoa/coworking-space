@@ -144,6 +144,46 @@ export const operationHourFunc = (operationHour: any) => {
     return operationHourConvert;
 }
 
+export const operationHourFuncForChecked = (operationHour: any) => {
+  const operationHourConvert = []
+    operationHourConvert.push({
+        "day": "Mon",
+        "openTime": operationHour.weekStart,
+        "closeTime": operationHour.weekEnd
+    })
+    operationHourConvert.push({
+        "day": "Tue",
+        "openTime": operationHour.weekStart,
+        "closeTime": operationHour.weekEnd
+    })
+    operationHourConvert.push({
+        "day": "Wed",
+        "openTime": operationHour.weekStart,
+        "closeTime": operationHour.weekEnd
+    })
+    operationHourConvert.push({
+        "day": "Thu",
+        "openTime": operationHour.weekStart,
+        "closeTime": operationHour.weekEnd
+    })
+    operationHourConvert.push({
+        "day": "Fri",
+        "openTime": operationHour.weekStart,
+        "closeTime": operationHour.weekEnd
+    })
+    operationHourConvert.push({
+        "day": "Sat",
+        "openTime": operationHour.weekStart,
+        "closeTime": operationHour.weekEnd
+    })
+    operationHourConvert.push({
+        "day": "Sun",
+        "openTime": operationHour.weekStart,
+        "closeTime": operationHour.weekEnd
+    })
+    return operationHourConvert;
+}
+
 export const formatCategoryById = (categoryId: number, categoryList?: Category[]) => {
   return categoryList?.find((category) => category.id === categoryId)?.name
 }

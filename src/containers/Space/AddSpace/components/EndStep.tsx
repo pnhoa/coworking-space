@@ -3,7 +3,7 @@ import { Button, notification } from "antd";
 import spaceApi from "api/spaceApi";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { operationHourFunc } from "utils/common";
+import { operationHourFunc, operationHourFuncForChecked } from "utils/common";
 
 
 interface Props {
@@ -22,7 +22,12 @@ export const EndStep: FC<Props> = ({overview, description, contact, address,
 
      const navigate = useNavigate()
 
-    const operationHourConvert = operationHourFunc(operationHour)
+    let operationHourConvert ;
+    if(operationHour.checked === false) {
+      operationHourConvert = operationHourFuncForChecked(operationHour)
+    } else {
+      operationHourConvert = operationHourFunc(operationHour)
+    }
     const descriptionConvert = {
         "shortDescription": description.shortDescription,
         "description": description.description,
@@ -64,7 +69,9 @@ export const EndStep: FC<Props> = ({overview, description, contact, address,
 
     return (
         <div>
-           <Button onClick={handleAddSpace}>Add your space</Button>
+           <Button type='primary' htmlType='submit' style={{ width: '20%', backgroundColor:'#08966b' }} onClick={handleAddSpace}>
+               Add your space
+            </Button>
         </div>
     );
 

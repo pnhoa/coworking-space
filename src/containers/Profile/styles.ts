@@ -7,7 +7,7 @@ export const ProfileStyles = styled.div`
   }
   .content {
     padding: 150px 0 30px;
-    background-color: #fff;
+    background-color: #f8f8f8;
     & > .title {
       text-align: center;
     }

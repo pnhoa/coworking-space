@@ -42,7 +42,6 @@ const spaceApi = {
   },
 
   paymentSpace(spaceId: number, servicePackId: number) {
-    console.log(spaceId + "-" + servicePackId)
     return axiosClient.put(`/spaces/payment/${spaceId}/${servicePackId}`);
   },
 

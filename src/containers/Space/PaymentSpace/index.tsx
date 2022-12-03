@@ -44,7 +44,6 @@ export const PaymentSpace = () => {
 
 
     const handleClick = (servicePack: ServicePack) => {
-      console.log(servicePack)
       localStorage.setItem("spaceId", Number(id).toString())
       localStorage.setItem("servicePackId", servicePack.id.toString())
       localStorage.setItem("price", servicePack.price.toString())

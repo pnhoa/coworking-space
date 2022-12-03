@@ -64,11 +64,11 @@ const SpaceOverviewDetailInfo: FC = () => {
           </Col>
           <Col span={3} className='fw-500'>Min Price</Col>
           <Col span={5} >
-            {record?.minPrice || 'N/A'}
+            {formatPrice(record?.minPrice) || 'N/A'}
           </Col>
           <Col span={3} className='fw-500'>Max Price</Col>
           <Col span={5} >
-            {record?.maxPrice || 'N/A'}
+            {formatPrice(record?.maxPrice) || 'N/A'}
           </Col>
         </Row>
 

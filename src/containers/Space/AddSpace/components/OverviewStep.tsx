@@ -73,7 +73,7 @@ export const OverviewStep: FC<Props> = ({data, onSuccess }) => {
                         label='Category'
                         rules={[{ required: true, message: 'Please select a category' }]}
                         >
-                        <Select placeholder='Please select a category'>
+                        <Select placeholder='Please select a category' className="select-category">
                             {categoryList?.map((item: Category) => (
                             <Option key={item?.id} value={item?.id}>
                                 {item?.name}

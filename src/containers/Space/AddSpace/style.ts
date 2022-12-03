@@ -389,7 +389,41 @@ export default styled.div`
     outline: none;
   }
   .ant-select.ant-select-in-form-item {
-     width: 75%; 
+     min-height: 40px;
   }
+  .ant-select-selector {
+    border: solid 1px #ccc;
+    width: 100%;
+    min-height: 40px;
+    min-weight:240px;
+    border-radius: 5px;
+    padding-left: 8px;
+  }
+  .select-category {
+    width: 40%; 
+  }
+  .ant-form-horizontal .ant-form-item-control {
+    flex: 1 1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .ant-btn-background-ghost.ant-btn-primary {
+    background-color: #08966b;
+    color: #FFFFFF;
+  }
+  .ant-btn-background-ghost.ant-btn-primary:hover {
+    color: #08966b;
+    background-color: #FFFFFF;
+  }
+
+  .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
+    color: #08966b;
+  }
+
+  .day-week {
+    font-size: 18px;
+    font-weight: 500;
+}
   
 `;

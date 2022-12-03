@@ -1,5 +1,6 @@
-import { Button, Col, Divider, Form, Row, Select } from "antd";
-import { FC} from "react";
+import { Button, Checkbox, Col, Divider, Form, Row, Select } from "antd";
+import { CheckboxChangeEvent } from "antd/lib/checkbox";
+import { FC, useState } from "react";
 import { getDayInWeek, getHourInDay } from "utils/common";
 
 
@@ -12,6 +13,17 @@ const { Option } = Select
 
 export const OperationHourStep: FC<Props> = ({data, onSuccess }) => {
 
+    const [selected, setSelected] = useState(data.checked);
+    const [title, setTitle] = useState('Different');
+
+    const onChange = (e: CheckboxChangeEvent) => {
+        if(e.target.checked  !== selected) {
+            setSelected(!selected)
+            setTitle(e.target.checked === false ? 'Different' : 'Same Hours')
+        }
+        
+      };
+
     const hourInDay = getHourInDay()
     const dayInWeek = getDayInWeek()
 
@@ -22,49 +34,91 @@ export const OperationHourStep: FC<Props> = ({data, onSuccess }) => {
             <Divider />
 
             <Form name='overview-step' scrollToFirstError onFinish={onSuccess} initialValues={data} >
+                <Form.Item
+                    name='checked'
+                    valuePropName="checked"            
+                >
+                    <Checkbox style={{marginBottom: '20px'}} onChange={onChange} defaultChecked={data.checked}>{title}</Checkbox>
+                </Form.Item>
                 
-                <Row gutter={24}>
+                
+                {selected === true ?
+                    dayInWeek.map((day) => (
+                        <Row gutter={24} key={day.key}>
+                            <Col span={24} key={day.key + 1} className="day-week"><h3>{day.value}</h3></Col>
+                            <Col span={12} key={day.key + 2}>
+                                <Form.Item
+                                name={day.key + 'Start'}
+                                label='From'
+                                rules={[{ required: true, message: 'Please input start time!' }]}
+                                >
+                                <Select placeholder='select start time'>
+                                {hourInDay?.map((item) => (
+                                <Option key={item.key} value={item.key}>
+                                    {item.value}
+                                </Option>
+                                ))}
+                                </Select>
+                                
+                                </Form.Item>
+                            </Col>
+                            <Col span={12} key={day.key + 3}>
+                                <Form.Item
+                                name={day.key + 'End'}
+                                label='To'
+                                rules={[{ required: true, message: 'Please input end time!' }]}
+                                >
+                                <Select placeholder='select end time'>
+                                {hourInDay?.map((item) => (
+                                <Option key={item.key} value={item.key}>
+                                    {item.value}
+                                </Option>
+                                ))}
+                                </Select>
+                                
+                                </Form.Item>
+                            </Col>
+                            </Row>
+                        
+                    ))
+                
+                :   <Row gutter={24}>
+                        <Col span={24} className="day-week"><h3>Same hours Monday - Sunday</h3></Col>
+                        <Col span={12} >
+                                <Form.Item
+                                name='weekStart'
+                                label='From'
+                                rules={[{ required: true, message: 'Please input start time!' }]}
+                                >
+                                <Select placeholder='select start time'>
+                                {hourInDay?.map((item) => (
+                                <Option key={item.key} value={item.key}>
+                                    {item.value}
+                                </Option>
+                                ))}
+                                </Select>
+                                
+                                </Form.Item>
+                            </Col>
+                            <Col span={12} >
+                                <Form.Item
+                                name='weekEnd'
+                                label='To'
+                                rules={[{ required: true, message: 'Please input end time!' }]}
+                                >
+                                <Select placeholder='select end time'>
+                                {hourInDay?.map((item) => (
+                                <Option key={item.key} value={item.key}>
+                                    {item.value}
+                                </Option>
+                                ))}
+                                </Select>
+                                
+                                </Form.Item>
+                            </Col>
+                    </Row>}
                     
-                    {
-                        dayInWeek.map((day) => (
-                            <Row gutter={48} key={day.key}>
-                                <Col span={24} key={day.key + 1}><h3>{day.value}</h3></Col>
-                                <Col span={12} key={day.key + 2}>
-                                    <Form.Item
-                                    name={day.key + 'Start'}
-                                    label='From'
-                                    rules={[{ required: true, message: 'Please input start time!' }]}
-                                    >
-                                    <Select placeholder='select start time'>
-                                    {hourInDay?.map((item) => (
-                                    <Option key={item.key} value={item.key}>
-                                        {item.value}
-                                    </Option>
-                                    ))}
-                                    </Select>
-                                    
-                                    </Form.Item>
-                                </Col>
-                                <Col span={12} key={day.key + 3}>
-                                    <Form.Item
-                                    name={day.key + 'End'}
-                                    label='To'
-                                    rules={[{ required: true, message: 'Please input end time!' }]}
-                                    >
-                                    <Select placeholder='select end time'>
-                                    {hourInDay?.map((item) => (
-                                    <Option key={item.key} value={item.key}>
-                                        {item.value}
-                                    </Option>
-                                    ))}
-                                    </Select>
-                                    
-                                    </Form.Item>
-                                </Col>
-                                </Row>
-                            
-                        ))
-                    }
+                    
                     
   
                     <Col span={24}>
@@ -74,7 +128,7 @@ export const OperationHourStep: FC<Props> = ({data, onSuccess }) => {
                             </Button>
                         </Form.Item>
                     </Col>  
-                </Row>
+                
             </Form>
 
         </div>

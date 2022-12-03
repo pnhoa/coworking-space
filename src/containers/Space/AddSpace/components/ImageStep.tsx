@@ -1,4 +1,4 @@
-import { Button, Col, Divider, Form, Image, Row, UploadFile, UploadProps } from "antd";
+import { Button, Col, Divider, Form, Image, Row, UploadProps } from "antd";
 import Upload, { RcFile } from "antd/lib/upload";
 import FormUploadImage from "components/FormUploadImage";
 import { FormContextCustom } from "context/FormContextCustom";
@@ -17,7 +17,7 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
 
     const [form] = Form.useForm();
 
-    const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const [fileList, setFileList] = useState<any[]>([]);
     const [fileUrls, setFileUrls] = useState<string[]>([]);
     
       const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
@@ -35,7 +35,7 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
         return fileUrls;
       };
     
-      const onPreview = async (file: UploadFile) => {
+      const onPreview = async (file: any) => {
         let src = file.url as string;
         if (!src) {
           src = await new Promise((resolve) => {

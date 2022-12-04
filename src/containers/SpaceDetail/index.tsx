@@ -120,27 +120,34 @@ export const SpaceDetail = () => {
                 <div className='grid__column5_picture'>
                   <div className='spaceTableImage'>           
                     <div className='ProductTableRow'>
-                      <Image className='image-detail'
-                        src={ images[1] ? images[1] : `no-data.jpeg`}
-                        alt='image'
-                        preview ={false}
-                      />
-                      <Image className='image-detail'
-                        src={ images[2] ? images[2] : `no-data.jpeg`}
-                        alt='image'
-                        preview ={false}
-                      />
+                      {images[1] ?
+                        <Image className='image-detail'
+                          src={ images[1] ? images[1] : `default.png`}
+
+                          preview ={false}
+                        />
+                        : <></>}
+                      {images[2] ?
+                        <Image className='image-detail'
+                          src={ images[2] ? images[2] : `default.png`}
+
+                          preview ={false}
+                        />
+                        : <></>}
+                      
                     </div>
                     <div className='ProductTableRow'>
-                      <Image className='image-detail'
-                        src={ images[3] ? images[3] : `no-data.jpeg`}
-                        alt='image'
-                        preview ={false}
-                      />
+                      {images[3] ?
+                        <Image className='image-detail'
+                          src={ images[3] ? images[3] : `default.png`}
+
+                          preview ={false}
+                        />
+                        : <></>}
                       {images[4] ?
                         <Image className='image-detail'
-                          src={ images[4] ? images[4] : `./default.png`}
-                          alt='image'
+                          src={ images[4] ? images[4] : `default.png`}
+
                           preview ={false}
                         />
                         : <></>}

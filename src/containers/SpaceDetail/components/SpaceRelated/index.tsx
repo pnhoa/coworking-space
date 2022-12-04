@@ -11,7 +11,7 @@ export const SpaceRelated: React.FC<Props> = ({ data }) => {
 
   return (
     <SpaceRelatedWrapper>
-      <span className='header'>Spaces Nearby</span>
+      <span className='header'>Related Spaces</span>
       <SpaceList listData={spaceList} />
     </SpaceRelatedWrapper>
   );

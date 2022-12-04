@@ -23,7 +23,7 @@ const LoginPage: FC = () => {
       navigate(-1);
     } catch (error: any) {
       notification.error({
-        message: `${error.message}`,
+        message: 'Login failed!!!',
       });
     }
   };

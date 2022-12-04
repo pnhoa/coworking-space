@@ -2,7 +2,6 @@ import { RefreshTokenPayLoad, LogoutPayLoad } from './../interfaces/auth';
 import { RefreshTokenRespone } from './../interfaces/common';
 import { AuthResponse, LoginPayload, RegisterPayLoad } from 'interfaces';
 import axiosClient from './axiosClient';
-import { notification } from 'antd';
 export const authApi = {
   login(payload: LoginPayload): Promise<AuthResponse> {
     const url = '/auth/signin';
@@ -33,14 +32,6 @@ export const authApi = {
         type: 'application/json'
       }));
 
-    await fetch(`${process.env.REACT_APP_URL}/auth/signup`, {
-    method: 'post',
-    body: formData,
-    }).then(function (response) {
-      
-    })
-    .catch(function (response) {
-      notification.error({ message: response.message })
-    });
+    return formData;
   },
 };

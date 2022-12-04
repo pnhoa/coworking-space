@@ -29,7 +29,6 @@ export const ImageStep: FC<Props> = ({data, onSuccess }) => {
         if(newUrl !== undefined) {
             fileUrls.push(newUrl)
             setFileUrls(fileUrls)
-            console.log(fileUrls)
         }
         
         return fileUrls;

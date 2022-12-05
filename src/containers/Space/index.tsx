@@ -17,8 +17,8 @@ export const Space = () => {
   const [spaceList, setSpaceList] = useState([] as SpaceI[]);
   const [pagination, setPagination] = useState({
     page: 0,
-    limit: 20,
-    total: 20,
+    limit: 12,
+    total: 12,
   });
   const [loading, setLoading] = useState(true);
   const [filterLoading, setFilterLoading] = useState(false);
@@ -28,7 +28,7 @@ export const Space = () => {
     return {
       ...params,
       page: Number(params.page) || 0,
-      limit: Number(params.limit) || 20,
+      limit: Number(params.limit) || 12,
     };
   }, [location.search]);
 

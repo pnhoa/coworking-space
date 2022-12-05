@@ -45,8 +45,7 @@ const BookingSpace = () => {
         })();
     }, [customerId, navigate]);
 
-    const handleChangeSubSPace = (subSpaceId: number) => {
-        console.log("Goi tai master")
+    const handleChangeSubSpace = (subSpaceId: number) => {
         const match = subSpaceList.find(x => x.id === subSpaceId)
         setSubSpace(match ? match : subSpaceList[0] )
         
@@ -69,7 +68,7 @@ const BookingSpace = () => {
                                     <Col span={17}>
                                         <SubSpaceDetail
                                             subSpaceList={subSpaceList}
-                                            onChangeSub={handleChangeSubSPace}
+                                            onChangeSub={handleChangeSubSpace}
                                         />
                                     </Col>
                                     <Col span={7}>

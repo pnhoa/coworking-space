@@ -224,6 +224,10 @@ export const SpaceDetailWrapper = styled.div`
     cursor: pointer;
   }
   .RelatedWapper {
+    width: 100%;
+    margin: 20px 0 !important;
+    padding: 10px 20px !important;
+    background-color: #fcfcfc;
   }
   .sweet_loading {
     justify-content: center;
@@ -556,5 +560,8 @@ export const SpaceDetailWrapper = styled.div`
     margin: 10px 0 !important;
     padding: 10px 80px 10px 80px !important;
     background-color: #fcfcfc;
+  }
+  .ant-divider {
+    color: #08966b;
   }
 `;

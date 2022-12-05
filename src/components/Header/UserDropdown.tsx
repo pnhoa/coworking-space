@@ -54,7 +54,7 @@ export const UserDropdown = () => {
 
       <Menu.Item key='order'>
         <div className='div-menu-item'>
-          <Link to='/history' className='link-menu-item'>
+          <Link to='/booking/history' className='link-menu-item'>
             <div className='order-menu-item'>
               <ShoppingOutlined className='icon-menu-item' />
               <span>Booking History</span>
@@ -65,7 +65,7 @@ export const UserDropdown = () => {
 
       <Menu.Item key='space'>
         <div className='div-menu-item'>
-          <Link to='/space' className='link-menu-item'>
+          <Link to='/your-space' className='link-menu-item'>
             <div className='order-menu-item'>
               <BuildOutlined className='icon-menu-item' />
               <span>Your Space</span>

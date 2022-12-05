@@ -8,6 +8,11 @@ import { SpaceDetail } from 'containers/SpaceDetail';
 import BookingSpace from 'containers/Space/BookingSpace';
 import { BookingConfirm } from 'containers/Space/BookingSpace/components/BookingComfirm';
 import { BookingHistory } from 'containers/Space/BookingHistory';
+import { AddSpace } from 'containers/Space/AddSpace';
+import { YourSpaceList } from 'containers/Space/YourSpace';
+import { YourSpaceDetail } from 'containers/Space/YourSpaceDetail';
+import { PaymentSpace } from 'containers/Space/PaymentSpace';
+import { BookingManagement } from 'containers/Space/BookingManagement';
 
 export const PUBLIC_ROUTES: TPublicRoutes = [
   {
@@ -42,6 +47,11 @@ export const PUBLIC_ROUTES: TPublicRoutes = [
     exact: true,
   },
   {
+    path: '/booking/management',
+    element: <BookingManagement />,
+    exact: true,
+  },
+  {
     path: '/register',
     element: <RegisterPage />,
     exact: true,
@@ -49,6 +59,26 @@ export const PUBLIC_ROUTES: TPublicRoutes = [
   {
     path: '/profile',
     element: <ProfilePage />,
+    exact: true,
+  },
+  {
+    path: '/add-space',
+    element: <AddSpace />,
+    exact: true,
+  },
+  {
+    path: '/your-space',
+    element: <YourSpaceList />,
+    exact: true,
+  },
+  {
+    path: '/your-space/:id/show',
+    element: <YourSpaceDetail />,
+    exact: true,
+  },
+  {
+    path: '/your-space/:id/payment',
+    element: <PaymentSpace />,
     exact: true,
   },
 ];

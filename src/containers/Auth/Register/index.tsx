@@ -1,16 +1,14 @@
-import { unwrapResult } from '@reduxjs/toolkit';
 import { Button, Form, Input, notification, Radio } from 'antd';
-import { useAppDispatch, useAppSelector } from 'app/hook';
+import { authApi } from 'api/authApi';
+import {  useAppSelector } from 'app/hook';
 import FormUploadImage from 'components/FormUploadImage';
 import { FormContextCustom } from 'context/FormContextCustom';
 import React, { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { register } from 'redux/authSlice';
 import { RegisterPageWrapper } from './styles';
 
 const RegisterPage: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const loading = useAppSelector((state) => state.auth.loading);
 
   const [form] = Form.useForm();
@@ -18,17 +16,34 @@ const RegisterPage: FC = () => {
   const onFinish = async (values: any) => {
     try {
       const { confirm, ...newValues } = values;
-      const resultAction = await dispatch(register(newValues));
-      unwrapResult(resultAction);
-      notification.success({
-        message: 'Register successfully!',
-      });
-      setTimeout(() => {
-        notification.info({
-          message: 'Login now!!',
+      const formData = await authApi.register(newValues);
+
+      await fetch(`${process.env.REACT_APP_URL}/auth/signup`, {
+        method: 'post',
+        body: formData, })
+        .then( (response) =>  response.json() )
+        .then((data) => {
+          if(data.status === 'BAD_REQUEST') {
+            notification.error({
+              message: data.message,
+            });
+          } else {
+            notification.success({
+              message: 'Register successfully!',
+            });
+            setTimeout(() => {
+              notification.info({
+                message: 'Login now!!',
+              });
+              navigate('/');
+              navigate('/login')
+            }, 2000);
+          }
+        })
+        .catch(function (response) {
+          notification.error({ message: response.message })
         });
-        navigate('/login');
-      }, 3000);
+      
     } catch (error: any) {
       notification.error({
         message: `${error.message} `,

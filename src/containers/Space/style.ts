@@ -361,4 +361,12 @@ export default styled.div`
       }
     }
   }
+  .ant-btn-background-ghost.ant-btn-primary {
+    background-color: #08966b;
+    color: #FFFFFF;
+  }
+  .ant-btn-background-ghost.ant-btn-primary:hover {
+    color: #08966b;
+    background-color: #FFFFFF;
+  }
 `;

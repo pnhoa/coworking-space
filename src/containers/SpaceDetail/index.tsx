@@ -37,7 +37,7 @@ export const SpaceDetail = () => {
     const data = await spaceApi.getById(spaceId);
     setSpace(data);
 
-    const recommendList = await spaceApi.getAll({ limit: 5, page: 0 });
+    const recommendList = await spaceApi.getAllNearBy(customerId, spaceId, { limit: 8, page: 0 });
     setSpaceRelatedList(recommendList.data);
 
     const images: string[] = [data.largeImage ? data.largeImage : 'no-data.jpeg']
@@ -49,7 +49,7 @@ export const SpaceDetail = () => {
   useEffect(() => {
     (async () => {
       if (id) {
-        await getData(Number(id), Number(customerId) || 1);
+        await getData(Number(id), Number(customerId) || 0);
         setStartLoading(false);
       }
     })();
@@ -102,6 +102,7 @@ export const SpaceDetail = () => {
                       <Image
                         src={ images[0] ? images[0] : `no-data.jpeg`}
                         alt='image'
+                        preview ={false}
                         style={{
                           width: '720px',
                           height: '360px',
@@ -119,25 +120,35 @@ export const SpaceDetail = () => {
                 <div className='grid__column5_picture'>
                   <div className='spaceTableImage'>           
                     <div className='ProductTableRow'>
-                      <Image className='image-detail'
-                        src={ images[1] ? images[1] : `no-data.jpeg`}
-                        alt='image'
-                      />
-                      <Image className='image-detail'
-                        src={ images[2] ? images[2] : `no-data.jpeg`}
-                        alt='image'
-                      />
+                      {images[1] ?
+                        <Image className='image-detail'
+                          src={ images[1] ? images[1] : `default.png`}
+
+                          preview ={false}
+                        />
+                        : <></>}
+                      {images[2] ?
+                        <Image className='image-detail'
+                          src={ images[2] ? images[2] : `default.png`}
+
+                          preview ={false}
+                        />
+                        : <></>}
+                      
                     </div>
                     <div className='ProductTableRow'>
-                      <Image className='image-detail'
-                        src={ images[3] ? images[3] : `no-data.jpeg`}
-                        alt='image'
-                        
-                      />
+                      {images[3] ?
+                        <Image className='image-detail'
+                          src={ images[3] ? images[3] : `default.png`}
+
+                          preview ={false}
+                        />
+                        : <></>}
                       {images[4] ?
                         <Image className='image-detail'
-                          src={ images[4] ? images[4] : `./default.png`}
-                          alt='image'
+                          src={ images[4] ? images[4] : `default.png`}
+
+                          preview ={false}
                         />
                         : <></>}
                     </div>

@@ -9,7 +9,7 @@ import { checkRefreshToken } from 'redux/authSlice';
 import { setLoading } from 'redux/loadingSlice';
 import { HeaderWrapper } from './styles';
 import queryString from 'query-string';
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 import { UserDropdown } from './UserDropdown';
 
 const NavBar = () => {
@@ -47,11 +47,18 @@ const NavBar = () => {
       page: 0,
       ...newFilters,
     };
-    navigate(`${location.pathname}?${queryString.stringify(filters)}`);
+    navigate(`/?${queryString.stringify(filters)}`);
   };
 
   const handleAddSpace = () => {
-    navigate('/add-space')
+    if(loggedInUser === 0){
+      setTimeout(() => {
+        notification.error({ message:"Please login!!"})
+        navigate('/login') }, 500);
+    } else {
+      navigate('/add-space')
+    }
+    
   }
 
   const handleLogin = () => {

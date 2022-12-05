@@ -192,3 +192,8 @@ export interface MatchSubSpace {
   endDate: Date
   spaceId: number
 }
+
+export interface HourInDay {
+  key: string,
+  value: string
+}

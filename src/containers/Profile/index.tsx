@@ -24,10 +24,12 @@ export const ProfilePage = () => {
           notification.error({ message:"Please login!!"})
           navigate('/login') }, 500);
         
+      } else {
+        const user = await userApi.getById(customerId);
+        setCustomer(user);
+        setLoading(false);
       }
-      const user = await userApi.getById(customerId);
-      setCustomer(user);
-      setLoading(false);
+      
     })();
   }, [refresh]);
 

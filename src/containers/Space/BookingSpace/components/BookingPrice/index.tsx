@@ -64,7 +64,6 @@ export const BookingPrice : React.FC<Props> = ({ customer, matchSubSpace, subSpa
           >
             BOOKING
           </button>
-          {console.log(matchSubSpace)}
         </div>
       </BookingStyles>
     );

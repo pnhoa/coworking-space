@@ -4,6 +4,10 @@ export enum ROLES {
   USER = 'ROLE_USER',
 }
 
+export const AMENITY = [
+  'internet', 'parking', 'airConditioner', 'heater', 'cableTV', 'tv', 'toilet', 'motel', 'catering'
+]
+
 export interface AuthResponse {
   id: number;
   username: string;

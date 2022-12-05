@@ -1,5 +1,5 @@
 import { CalendarOutlined, CompassOutlined } from '@ant-design/icons';
-import { Rate } from 'antd';
+import { Divider, Rate } from 'antd';
 import categoryApi from 'api/categoryApi';
 import ReadMore from 'components/ReadMore';
 import { SpaceDetailWrapper } from 'containers/SpaceDetail/styles';
@@ -36,6 +36,7 @@ export const SpaceInfor: React.FC<Props> = ({ data }) => {
           <CompassOutlined />
           <p  className='spaceAddressDetail'> {space.spaceAddress.addressLine1}, {space.spaceAddress.district}, {space.spaceAddress.province}, {space.spaceAddress.country}</p>
         </div>
+        <Divider></Divider>
         <div className='spaceDescription'>{space?.spaceDescription.shortDescription}</div>
         <ReadMore  child={(space?.spaceDescription.description).toString()}></ReadMore>
         <div className='ProductTable'>

@@ -98,6 +98,7 @@ export const AddSpace = () => {
   }
 
   const onSuccessOperationHourFrom = (values: any) => {
+    console.log(values)
     setOperationHour(values)
     setCurrent(6)
   }

@@ -23,7 +23,7 @@ export const EndStep: FC<Props> = ({overview, description, contact, address,
      const navigate = useNavigate()
 
     let operationHourConvert ;
-    if(operationHour.checked === false) {
+    if(operationHour.checked === undefined || operationHour.checked === false) {
       operationHourConvert = operationHourFuncForChecked(operationHour)
     } else {
       operationHourConvert = operationHourFunc(operationHour)
@@ -56,10 +56,26 @@ export const EndStep: FC<Props> = ({overview, description, contact, address,
 
     const handleAddSpace = async () => {
         try {
-            await spaceApi.addSpace(space)
-            setTimeout(() => {
-                notification.success({ message:"Add space successfully!!!"})
-                navigate('/your-space') }, 500);
+            const formData = await spaceApi.addSpace(space)
+            await fetch(`${process.env.REACT_APP_URL}/spaces`, {
+              method: 'post',
+              body: formData,
+              }).then( (response) =>  response.json())
+              .then((data) => {
+                if(data.status === '500 Internal Server Error') {
+                  notification.error({
+                    message: 'Failed add space',
+                  });
+                } else {
+                  setTimeout(() => {
+                    notification.success({ message:"Add space successfully!!!"})
+                    navigate('/your-space') }, 500);
+                }
+              })
+              .catch(function (response) {
+                notification.error({ message: response.message })
+              })
+            
           } catch (error: any) {
             notification.error({
               message: `${error.message}`,

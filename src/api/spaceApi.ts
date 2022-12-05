@@ -73,15 +73,7 @@ const spaceApi = {
         type: 'application/json'
       }));
 
-    await fetch(`${process.env.REACT_APP_URL}/spaces`, {
-    method: 'post',
-    body: formData,
-    }).then(function (response) {
-      
-    })
-    .catch(function (response) {
-      notification.error({ message: response.message })
-    });
+    return formData;
   },
 
   

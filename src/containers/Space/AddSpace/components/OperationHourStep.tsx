@@ -13,7 +13,7 @@ const { Option } = Select
 
 export const OperationHourStep: FC<Props> = ({data, onSuccess }) => {
 
-    const [selected, setSelected] = useState(data.checked);
+    const [selected, setSelected] = useState(data?.checked === undefined ? false : data?.checked);
     const [title, setTitle] = useState('Different');
 
     const onChange = (e: CheckboxChangeEvent) => {
@@ -38,7 +38,7 @@ export const OperationHourStep: FC<Props> = ({data, onSuccess }) => {
                     name='checked'
                     valuePropName="checked"            
                 >
-                    <Checkbox style={{marginBottom: '20px'}} onChange={onChange} defaultChecked={data.checked}>{title}</Checkbox>
+                    <Checkbox style={{marginBottom: '20px'}} onChange={onChange} defaultChecked={data?.checked === undefined ? false : data?.checked}>{title}</Checkbox>
                 </Form.Item>
                 
                 

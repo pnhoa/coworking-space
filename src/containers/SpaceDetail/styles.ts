@@ -23,6 +23,10 @@ export const SpaceDetailWrapper = styled.div`
     justify-content: center;
     position: relative;
   }
+  .largeImage {
+    max-width: 98%;
+    height: auto;
+  }
   .grid__column5_picture {
     width: 50%;
     padding: 30px 10px 10px 0px;
@@ -139,10 +143,10 @@ export const SpaceDetailWrapper = styled.div`
     margin-top: 60px;
   }
   .image-detail{
-    width: 360px;
-    height: 170px;
     border-radius: 6px;
-    margin-right: 15px;            
+    margin-right: 15px; 
+    max-width: 100%;
+    height: auto;        
   }
   .ProductTableRow {
     display: flex;

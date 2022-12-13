@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { Button, Col, Image, notification } from 'antd';
+import { Button, Col, Image, notification} from 'antd';
 import spaceApi from 'api/spaceApi';
 import { Footer } from 'components/Footer';
 import NavBar from 'components/Header';
@@ -78,6 +78,10 @@ export const SpaceDetail = () => {
     }
   }
 
+  const handleReturn = () => {
+      navigate(-1);
+  }
+
   return (
     <>
       {startloading ? (
@@ -88,12 +92,12 @@ export const SpaceDetail = () => {
             <div className='container_productDetails'>
               <div className='grid__row'>
                 <div className='back_btn '>
-                    <Link to={'/'} className='btn_back'>
+                    <div className='btn_back' onClick={handleReturn} >
                       <i>
                         <ArrowLeftOutlined />
                       </i>
                       Back
-                    </Link>
+                    </div>
                 </div>
                 <div className='grid__column5'>
                   {images.length !== 0 ? (
@@ -103,6 +107,7 @@ export const SpaceDetail = () => {
                         src={ images[0] ? images[0] : `no-data.jpeg`}
                         alt='image'
                         preview ={false}
+                        className="largeImage"
                         style={{
                           width: '720px',
                           height: '360px',
@@ -123,14 +128,20 @@ export const SpaceDetail = () => {
                       {images[1] ?
                         <Image className='image-detail'
                           src={ images[1] ? images[1] : `default.png`}
-
+                          style={{
+                            width: '360px',
+                            height: '175px',
+                          }}
                           preview ={false}
                         />
                         : <></>}
                       {images[2] ?
                         <Image className='image-detail'
                           src={ images[2] ? images[2] : `default.png`}
-
+                          style={{
+                            width: '360px',
+                            height: '175px',
+                          }}
                           preview ={false}
                         />
                         : <></>}
@@ -140,14 +151,20 @@ export const SpaceDetail = () => {
                       {images[3] ?
                         <Image className='image-detail'
                           src={ images[3] ? images[3] : `default.png`}
-
+                          style={{
+                            width: '360px',
+                            height: '175px',
+                          }}
                           preview ={false}
                         />
                         : <></>}
                       {images[4] ?
                         <Image className='image-detail'
                           src={ images[4] ? images[4] : `default.png`}
-
+                          style={{
+                            width: '360px',
+                            height: '175px',
+                          }}
                           preview ={false}
                         />
                         : <></>}
